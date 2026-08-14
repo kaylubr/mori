@@ -1,0 +1,25 @@
+{
+  "name": "mori",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kaylubr/mori#readme",
+  "bugs": {
+    "url": "https://github.com/kaylubr/mori/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaylubr/mori.git"
+  },
+  "license": "ISC",
+  "author": "kaylubr",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6"
+  }
+}

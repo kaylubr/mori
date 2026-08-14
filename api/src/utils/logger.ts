@@ -1,9 +1,9 @@
-function info<T> (...message: T[]): void {
-    console.log(...message)
+function info<T>(...message: T[]): void {
+  console.log(...message)
 }
 
-function error<T> (...message: T[]): void {
-    console.error(...message)
+function error<T>(...message: T[]): void {
+  console.error(...message)
 }
 
-export default { info, error } 
+export default { info, error }
