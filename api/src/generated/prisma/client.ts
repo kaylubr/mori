@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type Manhwa = Prisma.ManhwaModel
 /**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
  * Model User
  * 
  */

@@ -7,4 +7,5 @@ model User {
   avatarUrl    String
   createdAt    DateTime @default(now())
   manhwas      Manhwa[]
+  reviews      Review[]
 }

@@ -8,6 +8,7 @@ model Manhwa {
   addedByUserId       User?    @relation(fields: [userId], references: [id])
   userId              Int
   createdAt           DateTime
+  reviews             Review[]
 }
 
 enum Status {
