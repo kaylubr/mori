@@ -400,6 +400,7 @@ export const ModelName = {
   Chapter: 'Chapter',
   Manhwa: 'Manhwa',
   Review: 'Review',
+  ShelfEntry: 'ShelfEntry',
   Tag: 'Tag',
   User: 'User'
 } as const
@@ -417,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "chapter" | "manhwa" | "review" | "tag" | "user"
+    modelProps: "chapter" | "manhwa" | "review" | "shelfEntry" | "tag" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -643,6 +644,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ShelfEntry: {
+      payload: Prisma.$ShelfEntryPayload<ExtArgs>
+      fields: Prisma.ShelfEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShelfEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShelfEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.ShelfEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShelfEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        findMany: {
+          args: Prisma.ShelfEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>[]
+        }
+        create: {
+          args: Prisma.ShelfEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        createMany: {
+          args: Prisma.ShelfEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShelfEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.ShelfEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        update: {
+          args: Prisma.ShelfEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShelfEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShelfEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShelfEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShelfEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShelfEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.ShelfEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShelfEntry>
+        }
+        groupBy: {
+          args: Prisma.ShelfEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShelfEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShelfEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShelfEntryCountAggregateOutputType> | number
+        }
+      }
+    }
     Tag: {
       payload: Prisma.$TagPayload<ExtArgs>
       fields: Prisma.TagFieldRefs
@@ -865,6 +940,17 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const ShelfEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  manhwaId: 'manhwaId',
+  addedAt: 'addedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShelfEntryScalarFieldEnum = (typeof ShelfEntryScalarFieldEnum)[keyof typeof ShelfEntryScalarFieldEnum]
 
 
 export const TagScalarFieldEnum = {
@@ -1141,6 +1227,7 @@ export type GlobalOmitConfig = {
   chapter?: Prisma.ChapterOmit
   manhwa?: Prisma.ManhwaOmit
   review?: Prisma.ReviewOmit
+  shelfEntry?: Prisma.ShelfEntryOmit
   tag?: Prisma.TagOmit
   user?: Prisma.UserOmit
 }

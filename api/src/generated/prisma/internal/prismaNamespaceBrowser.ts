@@ -54,6 +54,7 @@ export const ModelName = {
   Chapter: 'Chapter',
   Manhwa: 'Manhwa',
   Review: 'Review',
+  ShelfEntry: 'ShelfEntry',
   Tag: 'Tag',
   User: 'User'
 } as const
@@ -109,6 +110,17 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const ShelfEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  manhwaId: 'manhwaId',
+  addedAt: 'addedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShelfEntryScalarFieldEnum = (typeof ShelfEntryScalarFieldEnum)[keyof typeof ShelfEntryScalarFieldEnum]
 
 
 export const TagScalarFieldEnum = {

@@ -11,6 +11,7 @@
 export type * from './models/Chapter.js'
 export type * from './models/Manhwa.js'
 export type * from './models/Review.js'
+export type * from './models/ShelfEntry.js'
 export type * from './models/Tag.js'
 export type * from './models/User.js'
 export type * from './commonInputTypes.js'

@@ -252,6 +252,7 @@ export type ManhwaWhereInput = {
   reviews?: Prisma.ReviewListRelationFilter
   tags?: Prisma.TagListRelationFilter
   chapters?: Prisma.ChapterListRelationFilter
+  shelfEntry?: Prisma.ShelfEntryListRelationFilter
 }
 
 export type ManhwaOrderByWithRelationInput = {
@@ -267,6 +268,7 @@ export type ManhwaOrderByWithRelationInput = {
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   tags?: Prisma.TagOrderByRelationAggregateInput
   chapters?: Prisma.ChapterOrderByRelationAggregateInput
+  shelfEntry?: Prisma.ShelfEntryOrderByRelationAggregateInput
 }
 
 export type ManhwaWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +287,7 @@ export type ManhwaWhereUniqueInput = Prisma.AtLeast<{
   reviews?: Prisma.ReviewListRelationFilter
   tags?: Prisma.TagListRelationFilter
   chapters?: Prisma.ChapterListRelationFilter
+  shelfEntry?: Prisma.ShelfEntryListRelationFilter
 }, "id">
 
 export type ManhwaOrderByWithAggregationInput = {
@@ -328,6 +331,7 @@ export type ManhwaCreateInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUncheckedCreateInput = {
@@ -342,6 +346,7 @@ export type ManhwaUncheckedCreateInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUpdateInput = {
@@ -355,6 +360,7 @@ export type ManhwaUpdateInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateInput = {
@@ -369,6 +375,7 @@ export type ManhwaUncheckedUpdateInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaCreateManyInput = {
@@ -498,6 +505,20 @@ export type ManhwaUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ManhwaUpdateToOneWithWhereWithoutReviewsInput, Prisma.ManhwaUpdateWithoutReviewsInput>, Prisma.ManhwaUncheckedUpdateWithoutReviewsInput>
 }
 
+export type ManhwaCreateNestedOneWithoutShelfEntryInput = {
+  create?: Prisma.XOR<Prisma.ManhwaCreateWithoutShelfEntryInput, Prisma.ManhwaUncheckedCreateWithoutShelfEntryInput>
+  connectOrCreate?: Prisma.ManhwaCreateOrConnectWithoutShelfEntryInput
+  connect?: Prisma.ManhwaWhereUniqueInput
+}
+
+export type ManhwaUpdateOneRequiredWithoutShelfEntryNestedInput = {
+  create?: Prisma.XOR<Prisma.ManhwaCreateWithoutShelfEntryInput, Prisma.ManhwaUncheckedCreateWithoutShelfEntryInput>
+  connectOrCreate?: Prisma.ManhwaCreateOrConnectWithoutShelfEntryInput
+  upsert?: Prisma.ManhwaUpsertWithoutShelfEntryInput
+  connect?: Prisma.ManhwaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ManhwaUpdateToOneWithWhereWithoutShelfEntryInput, Prisma.ManhwaUpdateWithoutShelfEntryInput>, Prisma.ManhwaUncheckedUpdateWithoutShelfEntryInput>
+}
+
 export type ManhwaCreateNestedManyWithoutTagsInput = {
   create?: Prisma.XOR<Prisma.ManhwaCreateWithoutTagsInput, Prisma.ManhwaUncheckedCreateWithoutTagsInput> | Prisma.ManhwaCreateWithoutTagsInput[] | Prisma.ManhwaUncheckedCreateWithoutTagsInput[]
   connectOrCreate?: Prisma.ManhwaCreateOrConnectWithoutTagsInput | Prisma.ManhwaCreateOrConnectWithoutTagsInput[]
@@ -588,6 +609,7 @@ export type ManhwaCreateWithoutChaptersInput = {
   addedByUserId?: Prisma.UserCreateNestedOneWithoutManhwasInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagCreateNestedManyWithoutManhwasInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUncheckedCreateWithoutChaptersInput = {
@@ -601,6 +623,7 @@ export type ManhwaUncheckedCreateWithoutChaptersInput = {
   createdAt: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutManhwasInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaCreateOrConnectWithoutChaptersInput = {
@@ -629,6 +652,7 @@ export type ManhwaUpdateWithoutChaptersInput = {
   addedByUserId?: Prisma.UserUpdateOneWithoutManhwasNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUpdateManyWithoutManhwasNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateWithoutChaptersInput = {
@@ -642,6 +666,7 @@ export type ManhwaUncheckedUpdateWithoutChaptersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutManhwasNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaCreateWithoutReviewsInput = {
@@ -654,6 +679,7 @@ export type ManhwaCreateWithoutReviewsInput = {
   addedByUserId?: Prisma.UserCreateNestedOneWithoutManhwasInput
   tags?: Prisma.TagCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUncheckedCreateWithoutReviewsInput = {
@@ -667,6 +693,7 @@ export type ManhwaUncheckedCreateWithoutReviewsInput = {
   createdAt: Date | string
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaCreateOrConnectWithoutReviewsInput = {
@@ -695,6 +722,7 @@ export type ManhwaUpdateWithoutReviewsInput = {
   addedByUserId?: Prisma.UserUpdateOneWithoutManhwasNestedInput
   tags?: Prisma.TagUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateWithoutReviewsInput = {
@@ -706,6 +734,77 @@ export type ManhwaUncheckedUpdateWithoutReviewsInput = {
   latestChapterNumber?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.TagUncheckedUpdateManyWithoutManhwasNestedInput
+  chapters?: Prisma.ChapterUncheckedUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutManhwaNestedInput
+}
+
+export type ManhwaCreateWithoutShelfEntryInput = {
+  title: string
+  description: string
+  thumbnailUrl: string
+  status?: $Enums.Status
+  latestChapterNumber: number
+  createdAt: Date | string
+  addedByUserId?: Prisma.UserCreateNestedOneWithoutManhwasInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutManhwaInput
+  tags?: Prisma.TagCreateNestedManyWithoutManhwasInput
+  chapters?: Prisma.ChapterCreateNestedManyWithoutManhwaInput
+}
+
+export type ManhwaUncheckedCreateWithoutShelfEntryInput = {
+  id?: number
+  title: string
+  description: string
+  thumbnailUrl: string
+  status?: $Enums.Status
+  latestChapterNumber: number
+  userId: number
+  createdAt: Date | string
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutManhwaInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutManhwasInput
+  chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutManhwaInput
+}
+
+export type ManhwaCreateOrConnectWithoutShelfEntryInput = {
+  where: Prisma.ManhwaWhereUniqueInput
+  create: Prisma.XOR<Prisma.ManhwaCreateWithoutShelfEntryInput, Prisma.ManhwaUncheckedCreateWithoutShelfEntryInput>
+}
+
+export type ManhwaUpsertWithoutShelfEntryInput = {
+  update: Prisma.XOR<Prisma.ManhwaUpdateWithoutShelfEntryInput, Prisma.ManhwaUncheckedUpdateWithoutShelfEntryInput>
+  create: Prisma.XOR<Prisma.ManhwaCreateWithoutShelfEntryInput, Prisma.ManhwaUncheckedCreateWithoutShelfEntryInput>
+  where?: Prisma.ManhwaWhereInput
+}
+
+export type ManhwaUpdateToOneWithWhereWithoutShelfEntryInput = {
+  where?: Prisma.ManhwaWhereInput
+  data: Prisma.XOR<Prisma.ManhwaUpdateWithoutShelfEntryInput, Prisma.ManhwaUncheckedUpdateWithoutShelfEntryInput>
+}
+
+export type ManhwaUpdateWithoutShelfEntryInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  latestChapterNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addedByUserId?: Prisma.UserUpdateOneWithoutManhwasNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutManhwaNestedInput
+  tags?: Prisma.TagUpdateManyWithoutManhwasNestedInput
+  chapters?: Prisma.ChapterUpdateManyWithoutManhwaNestedInput
+}
+
+export type ManhwaUncheckedUpdateWithoutShelfEntryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  latestChapterNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutManhwaNestedInput
 }
@@ -720,6 +819,7 @@ export type ManhwaCreateWithoutTagsInput = {
   addedByUserId?: Prisma.UserCreateNestedOneWithoutManhwasInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutManhwaInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUncheckedCreateWithoutTagsInput = {
@@ -733,6 +833,7 @@ export type ManhwaUncheckedCreateWithoutTagsInput = {
   createdAt: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutManhwaInput
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaCreateOrConnectWithoutTagsInput = {
@@ -780,6 +881,7 @@ export type ManhwaCreateWithoutAddedByUserIdInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaUncheckedCreateWithoutAddedByUserIdInput = {
@@ -793,6 +895,7 @@ export type ManhwaUncheckedCreateWithoutAddedByUserIdInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutManhwaInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutManhwasInput
   chapters?: Prisma.ChapterUncheckedCreateNestedManyWithoutManhwaInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutManhwaInput
 }
 
 export type ManhwaCreateOrConnectWithoutAddedByUserIdInput = {
@@ -831,6 +934,7 @@ export type ManhwaUpdateWithoutTagsInput = {
   addedByUserId?: Prisma.UserUpdateOneWithoutManhwasNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutManhwaNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateWithoutTagsInput = {
@@ -844,6 +948,7 @@ export type ManhwaUncheckedUpdateWithoutTagsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutManhwaNestedInput
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateManyWithoutTagsInput = {
@@ -877,6 +982,7 @@ export type ManhwaUpdateWithoutAddedByUserIdInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateWithoutAddedByUserIdInput = {
@@ -890,6 +996,7 @@ export type ManhwaUncheckedUpdateWithoutAddedByUserIdInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutManhwaNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutManhwasNestedInput
   chapters?: Prisma.ChapterUncheckedUpdateManyWithoutManhwaNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutManhwaNestedInput
 }
 
 export type ManhwaUncheckedUpdateManyWithoutAddedByUserIdInput = {
@@ -911,12 +1018,14 @@ export type ManhwaCountOutputType = {
   reviews: number
   tags: number
   chapters: number
+  shelfEntry: number
 }
 
 export type ManhwaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | ManhwaCountOutputTypeCountReviewsArgs
   tags?: boolean | ManhwaCountOutputTypeCountTagsArgs
   chapters?: boolean | ManhwaCountOutputTypeCountChaptersArgs
+  shelfEntry?: boolean | ManhwaCountOutputTypeCountShelfEntryArgs
 }
 
 /**
@@ -950,6 +1059,13 @@ export type ManhwaCountOutputTypeCountChaptersArgs<ExtArgs extends runtime.Types
   where?: Prisma.ChapterWhereInput
 }
 
+/**
+ * ManhwaCountOutputType without action
+ */
+export type ManhwaCountOutputTypeCountShelfEntryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShelfEntryWhereInput
+}
+
 
 export type ManhwaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -964,6 +1080,7 @@ export type ManhwaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   reviews?: boolean | Prisma.Manhwa$reviewsArgs<ExtArgs>
   tags?: boolean | Prisma.Manhwa$tagsArgs<ExtArgs>
   chapters?: boolean | Prisma.Manhwa$chaptersArgs<ExtArgs>
+  shelfEntry?: boolean | Prisma.Manhwa$shelfEntryArgs<ExtArgs>
   _count?: boolean | Prisma.ManhwaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["manhwa"]>
 
@@ -1008,6 +1125,7 @@ export type ManhwaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   reviews?: boolean | Prisma.Manhwa$reviewsArgs<ExtArgs>
   tags?: boolean | Prisma.Manhwa$tagsArgs<ExtArgs>
   chapters?: boolean | Prisma.Manhwa$chaptersArgs<ExtArgs>
+  shelfEntry?: boolean | Prisma.Manhwa$shelfEntryArgs<ExtArgs>
   _count?: boolean | Prisma.ManhwaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ManhwaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1024,6 +1142,7 @@ export type $ManhwaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     tags: Prisma.$TagPayload<ExtArgs>[]
     chapters: Prisma.$ChapterPayload<ExtArgs>[]
+    shelfEntry: Prisma.$ShelfEntryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1432,6 +1551,7 @@ export interface Prisma__ManhwaClient<T, Null = never, ExtArgs extends runtime.T
   reviews<T extends Prisma.Manhwa$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manhwa$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tags<T extends Prisma.Manhwa$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manhwa$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chapters<T extends Prisma.Manhwa$chaptersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manhwa$chaptersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shelfEntry<T extends Prisma.Manhwa$shelfEntryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Manhwa$shelfEntryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShelfEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1958,6 +2078,30 @@ export type Manhwa$chaptersArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ChapterScalarFieldEnum | Prisma.ChapterScalarFieldEnum[]
+}
+
+/**
+ * Manhwa.shelfEntry
+ */
+export type Manhwa$shelfEntryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShelfEntry
+   */
+  select?: Prisma.ShelfEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShelfEntry
+   */
+  omit?: Prisma.ShelfEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShelfEntryInclude<ExtArgs> | null
+  where?: Prisma.ShelfEntryWhereInput
+  orderBy?: Prisma.ShelfEntryOrderByWithRelationInput | Prisma.ShelfEntryOrderByWithRelationInput[]
+  cursor?: Prisma.ShelfEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShelfEntryScalarFieldEnum | Prisma.ShelfEntryScalarFieldEnum[]
 }
 
 /**

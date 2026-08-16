@@ -57,6 +57,11 @@ export type Manhwa = Prisma.ManhwaModel
  */
 export type Review = Prisma.ReviewModel
 /**
+ * Model ShelfEntry
+ * 
+ */
+export type ShelfEntry = Prisma.ShelfEntryModel
+/**
  * Model Tag
  * 
  */

@@ -5,11 +5,11 @@ model Review {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
-  manhwaId  Int
-  manhwa    Manhwa   @relation(fields: [manhwaId], references: [id])
+  manhwaId Int
+  manhwa   Manhwa @relation(fields: [manhwaId], references: [id])
 
   @@unique([userId, manhwaId])
 }
