@@ -8,6 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Chapter.js'
 export type * from './models/Manhwa.js'
 export type * from './models/Review.js'
 export type * from './models/Tag.js'

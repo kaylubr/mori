@@ -10,6 +10,7 @@ model Manhwa {
   createdAt           DateTime
   reviews             Review[]
   tags Tag[]
+  chapters Chapter[]
 }
 
 enum Status {

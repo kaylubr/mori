@@ -51,6 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Chapter: 'Chapter',
   Manhwa: 'Manhwa',
   Review: 'Review',
   Tag: 'Tag',
@@ -71,6 +72,16 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const ChapterScalarFieldEnum = {
+  id: 'id',
+  chapterNumber: 'chapterNumber',
+  sourceUrl: 'sourceUrl',
+  manhwaId: 'manhwaId'
+} as const
+
+export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
 export const ManhwaScalarFieldEnum = {
