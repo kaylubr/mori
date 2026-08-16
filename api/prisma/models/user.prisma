@@ -9,4 +9,5 @@ model User {
   manhwas      Manhwa[]
   reviews      Review[]
   shelfEntry   ShelfEntry[]
+  reports      Report[]
 }

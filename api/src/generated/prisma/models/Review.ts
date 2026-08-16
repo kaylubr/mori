@@ -246,6 +246,7 @@ export type ReviewWhereInput = {
   manhwaId?: Prisma.IntFilter<"Review"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   manhwa?: Prisma.XOR<Prisma.ManhwaScalarRelationFilter, Prisma.ManhwaWhereInput>
+  reports?: Prisma.ReportListRelationFilter
 }
 
 export type ReviewOrderByWithRelationInput = {
@@ -258,6 +259,7 @@ export type ReviewOrderByWithRelationInput = {
   manhwaId?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   manhwa?: Prisma.ManhwaOrderByWithRelationInput
+  reports?: Prisma.ReportOrderByRelationAggregateInput
 }
 
 export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   manhwaId?: Prisma.IntFilter<"Review"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   manhwa?: Prisma.XOR<Prisma.ManhwaScalarRelationFilter, Prisma.ManhwaWhereInput>
+  reports?: Prisma.ReportListRelationFilter
 }, "id" | "userId_manhwaId">
 
 export type ReviewOrderByWithAggregationInput = {
@@ -311,6 +314,7 @@ export type ReviewCreateInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReviewsInput
   manhwa: Prisma.ManhwaCreateNestedOneWithoutReviewsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewUncheckedCreateInput = {
@@ -321,6 +325,7 @@ export type ReviewUncheckedCreateInput = {
   updatedAt?: Date | string
   userId: number
   manhwaId: number
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewUpdateInput = {
@@ -330,6 +335,7 @@ export type ReviewUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
   manhwa?: Prisma.ManhwaUpdateOneRequiredWithoutReviewsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateInput = {
@@ -340,6 +346,7 @@ export type ReviewUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   manhwaId?: Prisma.IntFieldUpdateOperationsInput | number
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewCreateManyInput = {
@@ -377,6 +384,11 @@ export type ReviewListRelationFilter = {
 
 export type ReviewOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReviewScalarRelationFilter = {
+  is?: Prisma.ReviewWhereInput
+  isNot?: Prisma.ReviewWhereInput
 }
 
 export type ReviewUserIdManhwaIdCompoundUniqueInput = {
@@ -470,6 +482,20 @@ export type ReviewUncheckedUpdateManyWithoutManhwaNestedInput = {
   deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
 }
 
+export type ReviewCreateNestedOneWithoutReportsInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutReportsInput, Prisma.ReviewUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutReportsInput
+  connect?: Prisma.ReviewWhereUniqueInput
+}
+
+export type ReviewUpdateOneRequiredWithoutReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutReportsInput, Prisma.ReviewUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutReportsInput
+  upsert?: Prisma.ReviewUpsertWithoutReportsInput
+  connect?: Prisma.ReviewWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReviewUpdateToOneWithWhereWithoutReportsInput, Prisma.ReviewUpdateWithoutReportsInput>, Prisma.ReviewUncheckedUpdateWithoutReportsInput>
+}
+
 export type ReviewCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ReviewCreateWithoutUserInput, Prisma.ReviewUncheckedCreateWithoutUserInput> | Prisma.ReviewCreateWithoutUserInput[] | Prisma.ReviewUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutUserInput | Prisma.ReviewCreateOrConnectWithoutUserInput[]
@@ -518,6 +544,7 @@ export type ReviewCreateWithoutManhwaInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReviewsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewUncheckedCreateWithoutManhwaInput = {
@@ -527,6 +554,7 @@ export type ReviewUncheckedCreateWithoutManhwaInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: number
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewCreateOrConnectWithoutManhwaInput = {
@@ -568,12 +596,67 @@ export type ReviewScalarWhereInput = {
   manhwaId?: Prisma.IntFilter<"Review"> | number
 }
 
+export type ReviewCreateWithoutReportsInput = {
+  rating: number
+  comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutReviewsInput
+  manhwa: Prisma.ManhwaCreateNestedOneWithoutReviewsInput
+}
+
+export type ReviewUncheckedCreateWithoutReportsInput = {
+  id?: number
+  rating: number
+  comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId: number
+  manhwaId: number
+}
+
+export type ReviewCreateOrConnectWithoutReportsInput = {
+  where: Prisma.ReviewWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReviewCreateWithoutReportsInput, Prisma.ReviewUncheckedCreateWithoutReportsInput>
+}
+
+export type ReviewUpsertWithoutReportsInput = {
+  update: Prisma.XOR<Prisma.ReviewUpdateWithoutReportsInput, Prisma.ReviewUncheckedUpdateWithoutReportsInput>
+  create: Prisma.XOR<Prisma.ReviewCreateWithoutReportsInput, Prisma.ReviewUncheckedCreateWithoutReportsInput>
+  where?: Prisma.ReviewWhereInput
+}
+
+export type ReviewUpdateToOneWithWhereWithoutReportsInput = {
+  where?: Prisma.ReviewWhereInput
+  data: Prisma.XOR<Prisma.ReviewUpdateWithoutReportsInput, Prisma.ReviewUncheckedUpdateWithoutReportsInput>
+}
+
+export type ReviewUpdateWithoutReportsInput = {
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  manhwa?: Prisma.ManhwaUpdateOneRequiredWithoutReviewsNestedInput
+}
+
+export type ReviewUncheckedUpdateWithoutReportsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  manhwaId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type ReviewCreateWithoutUserInput = {
   rating: number
   comment: string
   createdAt?: Date | string
   updatedAt?: Date | string
   manhwa: Prisma.ManhwaCreateNestedOneWithoutReviewsInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewUncheckedCreateWithoutUserInput = {
@@ -583,6 +666,7 @@ export type ReviewUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   manhwaId: number
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReviewInput
 }
 
 export type ReviewCreateOrConnectWithoutUserInput = {
@@ -626,6 +710,7 @@ export type ReviewUpdateWithoutManhwaInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutManhwaInput = {
@@ -635,6 +720,7 @@ export type ReviewUncheckedUpdateWithoutManhwaInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateManyWithoutManhwaInput = {
@@ -661,6 +747,7 @@ export type ReviewUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwa?: Prisma.ManhwaUpdateOneRequiredWithoutReviewsNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutUserInput = {
@@ -670,6 +757,7 @@ export type ReviewUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwaId?: Prisma.IntFieldUpdateOperationsInput | number
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateManyWithoutUserInput = {
@@ -682,6 +770,35 @@ export type ReviewUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type ReviewCountOutputType
+ */
+
+export type ReviewCountOutputType = {
+  reports: number
+}
+
+export type ReviewCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  reports?: boolean | ReviewCountOutputTypeCountReportsArgs
+}
+
+/**
+ * ReviewCountOutputType without action
+ */
+export type ReviewCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReviewCountOutputType
+   */
+  select?: Prisma.ReviewCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ReviewCountOutputType without action
+ */
+export type ReviewCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
 
 export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -693,6 +810,8 @@ export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   manhwaId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   manhwa?: boolean | Prisma.ManhwaDefaultArgs<ExtArgs>
+  reports?: boolean | Prisma.Review$reportsArgs<ExtArgs>
+  _count?: boolean | Prisma.ReviewCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -733,6 +852,8 @@ export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   manhwa?: boolean | Prisma.ManhwaDefaultArgs<ExtArgs>
+  reports?: boolean | Prisma.Review$reportsArgs<ExtArgs>
+  _count?: boolean | Prisma.ReviewCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -748,6 +869,7 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     manhwa: Prisma.$ManhwaPayload<ExtArgs>
+    reports: Prisma.$ReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1153,6 +1275,7 @@ export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   manhwa<T extends Prisma.ManhwaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ManhwaDefaultArgs<ExtArgs>>): Prisma.Prisma__ManhwaClient<runtime.Types.Result.GetResult<Prisma.$ManhwaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reports<T extends Prisma.Review$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Review$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1587,6 +1710,30 @@ export type ReviewDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Reviews to delete.
    */
   limit?: number
+}
+
+/**
+ * Review.reports
+ */
+export type Review$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
 }
 
 /**

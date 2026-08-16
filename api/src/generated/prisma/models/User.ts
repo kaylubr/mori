@@ -235,6 +235,7 @@ export type UserWhereInput = {
   manhwas?: Prisma.ManhwaListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   shelfEntry?: Prisma.ShelfEntryListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -248,6 +249,7 @@ export type UserOrderByWithRelationInput = {
   manhwas?: Prisma.ManhwaOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   shelfEntry?: Prisma.ShelfEntryOrderByRelationAggregateInput
+  reports?: Prisma.ReportOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -264,6 +266,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   manhwas?: Prisma.ManhwaListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   shelfEntry?: Prisma.ShelfEntryListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
 }, "id" | "googleId" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -304,6 +307,7 @@ export type UserCreateInput = {
   manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -317,6 +321,7 @@ export type UserUncheckedCreateInput = {
   manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
 
 export type UserUpdateInput = {
@@ -329,6 +334,7 @@ export type UserUpdateInput = {
   manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -342,6 +348,7 @@ export type UserUncheckedUpdateInput = {
   manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -437,6 +444,20 @@ export type UserUpdateOneWithoutManhwasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutManhwasInput, Prisma.UserUpdateWithoutManhwasInput>, Prisma.UserUncheckedUpdateWithoutManhwasInput>
 }
 
+export type UserCreateNestedOneWithoutReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  upsert?: Prisma.UserUpsertWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsInput, Prisma.UserUpdateWithoutReportsInput>, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
 export type UserCreateNestedOneWithoutReviewsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
@@ -478,6 +499,7 @@ export type UserCreateWithoutManhwasInput = {
   createdAt?: Date | string
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateWithoutManhwasInput = {
@@ -490,6 +512,7 @@ export type UserUncheckedCreateWithoutManhwasInput = {
   createdAt?: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
 
 export type UserCreateOrConnectWithoutManhwasInput = {
@@ -517,6 +540,7 @@ export type UserUpdateWithoutManhwasInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutManhwasInput = {
@@ -527,6 +551,73 @@ export type UserUncheckedUpdateWithoutManhwasInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+}
+
+export type UserCreateWithoutReportsInput = {
+  email?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  username: string
+  avatarUrl: string
+  createdAt?: Date | string
+  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReportsInput = {
+  id?: number
+  email?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  username: string
+  avatarUrl: string
+  createdAt?: Date | string
+  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+}
+
+export type UserUpsertWithoutReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
+export type UserUpdateWithoutReportsInput = {
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -540,6 +631,7 @@ export type UserCreateWithoutReviewsInput = {
   createdAt?: Date | string
   manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -552,6 +644,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   createdAt?: Date | string
   manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -579,6 +672,7 @@ export type UserUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -591,6 +685,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
 
 export type UserCreateWithoutShelfEntryInput = {
@@ -602,6 +697,7 @@ export type UserCreateWithoutShelfEntryInput = {
   createdAt?: Date | string
   manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateWithoutShelfEntryInput = {
@@ -614,6 +710,7 @@ export type UserUncheckedCreateWithoutShelfEntryInput = {
   createdAt?: Date | string
   manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
 
 export type UserCreateOrConnectWithoutShelfEntryInput = {
@@ -641,6 +738,7 @@ export type UserUpdateWithoutShelfEntryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShelfEntryInput = {
@@ -653,6 +751,7 @@ export type UserUncheckedUpdateWithoutShelfEntryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
 
 
@@ -664,12 +763,14 @@ export type UserCountOutputType = {
   manhwas: number
   reviews: number
   shelfEntry: number
+  reports: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manhwas?: boolean | UserCountOutputTypeCountManhwasArgs
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
   shelfEntry?: boolean | UserCountOutputTypeCountShelfEntryArgs
+  reports?: boolean | UserCountOutputTypeCountReportsArgs
 }
 
 /**
@@ -703,6 +804,13 @@ export type UserCountOutputTypeCountShelfEntryArgs<ExtArgs extends runtime.Types
   where?: Prisma.ShelfEntryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -715,6 +823,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   manhwas?: boolean | Prisma.User$manhwasArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   shelfEntry?: boolean | Prisma.User$shelfEntryArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -753,6 +862,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   manhwas?: boolean | Prisma.User$manhwasArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   shelfEntry?: boolean | Prisma.User$shelfEntryArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -764,6 +874,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     manhwas: Prisma.$ManhwaPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     shelfEntry: Prisma.$ShelfEntryPayload<ExtArgs>[]
+    reports: Prisma.$ReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1170,6 +1281,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   manhwas<T extends Prisma.User$manhwasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$manhwasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ManhwaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shelfEntry<T extends Prisma.User$shelfEntryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$shelfEntryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShelfEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1668,6 +1780,30 @@ export type User$shelfEntryArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ShelfEntryScalarFieldEnum | Prisma.ShelfEntryScalarFieldEnum[]
+}
+
+/**
+ * User.reports
+ */
+export type User$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
 }
 
 /**

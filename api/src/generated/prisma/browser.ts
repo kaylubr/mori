@@ -28,6 +28,11 @@ export type Chapter = Prisma.ChapterModel
  */
 export type Manhwa = Prisma.ManhwaModel
 /**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel
+/**
  * Model Review
  * 
  */

@@ -1,0 +1,26 @@
+model Report {
+  id Int @id @default(autoincrement())
+
+  reporter   User @relation(fields: [reporterId], references: [id])
+  reporterId Int
+
+  review   Review @relation(fields: [reviewId], references: [id])
+  reviewId Int
+
+  reason Reason
+  status ReportStatus
+  createdAt DateTime @default(now())
+}
+
+enum Reason {
+  FAKE
+  UNHELPFUL
+  INAPPROPRIATE
+  OTHER
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  DISMISSED
+}

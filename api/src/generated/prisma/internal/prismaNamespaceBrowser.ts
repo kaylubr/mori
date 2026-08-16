@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Chapter: 'Chapter',
   Manhwa: 'Manhwa',
+  Report: 'Report',
   Review: 'Review',
   ShelfEntry: 'ShelfEntry',
   Tag: 'Tag',
@@ -97,6 +98,18 @@ export const ManhwaScalarFieldEnum = {
 } as const
 
 export type ManhwaScalarFieldEnum = (typeof ManhwaScalarFieldEnum)[keyof typeof ManhwaScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  reporterId: 'reporterId',
+  reviewId: 'reviewId',
+  reason: 'reason',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
 export const ReviewScalarFieldEnum = {

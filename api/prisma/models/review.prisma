@@ -11,5 +11,7 @@ model Review {
   manhwaId Int
   manhwa   Manhwa @relation(fields: [manhwaId], references: [id])
 
+  reports Report[]
+
   @@unique([userId, manhwaId])
 }
