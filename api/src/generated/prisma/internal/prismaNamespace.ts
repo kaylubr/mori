@@ -397,6 +397,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  Manhwa: 'Manhwa',
   User: 'User'
 } as const
 
@@ -413,10 +414,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "manhwa" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    Manhwa: {
+      payload: Prisma.$ManhwaPayload<ExtArgs>
+      fields: Prisma.ManhwaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ManhwaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ManhwaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        findFirst: {
+          args: Prisma.ManhwaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ManhwaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        findMany: {
+          args: Prisma.ManhwaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>[]
+        }
+        create: {
+          args: Prisma.ManhwaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        createMany: {
+          args: Prisma.ManhwaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ManhwaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>[]
+        }
+        delete: {
+          args: Prisma.ManhwaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        update: {
+          args: Prisma.ManhwaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        deleteMany: {
+          args: Prisma.ManhwaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ManhwaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ManhwaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>[]
+        }
+        upsert: {
+          args: Prisma.ManhwaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ManhwaPayload>
+        }
+        aggregate: {
+          args: Prisma.ManhwaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateManhwa>
+        }
+        groupBy: {
+          args: Prisma.ManhwaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ManhwaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ManhwaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ManhwaCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -530,6 +605,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const ManhwaScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  thumbnailUrl: 'thumbnailUrl',
+  status: 'status',
+  latestChapterNumber: 'latestChapterNumber',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ManhwaScalarFieldEnum = (typeof ManhwaScalarFieldEnum)[keyof typeof ManhwaScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -598,6 +687,20 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Status'
+ */
+export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+/**
+ * Reference to a field of type 'Status[]'
+ */
+export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
     
 
 
@@ -779,6 +882,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
  */
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
+  manhwa?: Prisma.ManhwaOmit
   user?: Prisma.UserOmit
 }
 

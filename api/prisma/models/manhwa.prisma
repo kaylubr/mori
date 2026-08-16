@@ -1,0 +1,17 @@
+model Manhwa {
+  id                  Int      @id @default(autoincrement())
+  title               String
+  description         String
+  thumbnailUrl        String
+  status              Status   @default(ONGOING)
+  latestChapterNumber Int
+  addedByUserId       User?    @relation(fields: [userId], references: [id])
+  userId              Int
+  createdAt           DateTime
+}
+
+enum Status {
+  ONGOING
+  HIATUS
+  COMPLETED
+}

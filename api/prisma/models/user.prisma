@@ -6,4 +6,5 @@ model User {
   username     String   @unique
   avatarUrl    String
   createdAt    DateTime @default(now())
+  manhwas      Manhwa[]
 }
