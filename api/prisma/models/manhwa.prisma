@@ -9,6 +9,7 @@ model Manhwa {
   userId              Int
   createdAt           DateTime
   reviews             Review[]
+  tags Tag[]
 }
 
 enum Status {

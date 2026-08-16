@@ -52,6 +52,11 @@ export type Manhwa = Prisma.ManhwaModel
  */
 export type Review = Prisma.ReviewModel
 /**
+ * Model Tag
+ * 
+ */
+export type Tag = Prisma.TagModel
+/**
  * Model User
  * 
  */
