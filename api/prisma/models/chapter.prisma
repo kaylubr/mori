@@ -2,6 +2,7 @@ model Chapter {
   id            Int    @id @default(autoincrement())
   chapterNumber Int
   sourceUrl     String
-  manhwa        Manhwa @relation(fields: [manhwaId], references: [id])
-  manhwaId      Int
+
+  manhwa   Manhwa @relation(fields: [manhwaId], references: [id])
+  manhwaId Int
 }

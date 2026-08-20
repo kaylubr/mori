@@ -1,13 +1,16 @@
 model User {
   id           Int          @id @default(autoincrement())
-  email        String?
+  email        String       @unique
   passwordHash String?
   googleId     String?      @unique
+  githubId     String?      @unique
   username     String       @unique
-  avatarUrl    String
+  avatarUrl    String?
   createdAt    DateTime     @default(now())
-  manhwas      Manhwa[]
-  reviews      Review[]
-  shelfEntry   ShelfEntry[]
-  reports      Report[]
+  updatedAt    DateTime     @updatedAt
+
+  manhwas    Manhwa[]
+  reviews    Review[]
+  shelfEntry ShelfEntry[]
+  reports    Report[]
 }

@@ -7,9 +7,9 @@ model Report {
   review   Review @relation(fields: [reviewId], references: [id])
   reviewId Int
 
-  reason Reason
-  status ReportStatus
-  createdAt DateTime @default(now())
+  reason    Reason
+  status    ReportStatus
+  createdAt DateTime     @default(now())
 }
 
 enum Reason {
