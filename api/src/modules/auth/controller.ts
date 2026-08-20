@@ -69,12 +69,20 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     return res.status(400).json({ error: "Invalid username or password" })
   }
 
-  return passport.authenticate("local", (authError: unknown, user: any) => {
+  return passport.authenticate("local", (authError: unknown, user: any, info?: any) => {
     if (authError) {
       return next(authError)
     }
 
     if (!user) {
+      if (info?.code === "no-account") {
+        return res.status(404).json({ error: "Account doesn't exist" })
+      }
+
+      if (info?.code === "passwordless") {
+        return res.status(400).json({ error: "This account signs in with Google/GitHub" })
+      }
+
       return res.status(401).json({ error: "Invalid username or password" })
     }
 
