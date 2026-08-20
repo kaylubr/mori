@@ -7,7 +7,7 @@ import { hashPassword } from "./password.js"
 
 const registerSchema = z.object({
   username: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
 })
 
