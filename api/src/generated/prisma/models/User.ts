@@ -39,9 +39,11 @@ export type UserMinAggregateOutputType = {
   email: string | null
   passwordHash: string | null
   googleId: string | null
+  githubId: string | null
   username: string | null
   avatarUrl: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -49,9 +51,11 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   passwordHash: string | null
   googleId: string | null
+  githubId: string | null
   username: string | null
   avatarUrl: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -59,9 +63,11 @@ export type UserCountAggregateOutputType = {
   email: number
   passwordHash: number
   googleId: number
+  githubId: number
   username: number
   avatarUrl: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -79,9 +85,11 @@ export type UserMinAggregateInputType = {
   email?: true
   passwordHash?: true
   googleId?: true
+  githubId?: true
   username?: true
   avatarUrl?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -89,9 +97,11 @@ export type UserMaxAggregateInputType = {
   email?: true
   passwordHash?: true
   googleId?: true
+  githubId?: true
   username?: true
   avatarUrl?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -99,9 +109,11 @@ export type UserCountAggregateInputType = {
   email?: true
   passwordHash?: true
   googleId?: true
+  githubId?: true
   username?: true
   avatarUrl?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -193,12 +205,14 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type UserGroupByOutputType = {
   id: number
-  email: string | null
+  email: string
   passwordHash: string | null
   googleId: string | null
+  githubId: string | null
   username: string
-  avatarUrl: string
+  avatarUrl: string | null
   createdAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -226,12 +240,14 @@ export type UserWhereInput = {
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.IntFilter<"User"> | number
-  email?: Prisma.StringNullableFilter<"User"> | string | null
+  email?: Prisma.StringFilter<"User"> | string
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
   googleId?: Prisma.StringNullableFilter<"User"> | string | null
+  githubId?: Prisma.StringNullableFilter<"User"> | string | null
   username?: Prisma.StringFilter<"User"> | string
-  avatarUrl?: Prisma.StringFilter<"User"> | string
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   manhwas?: Prisma.ManhwaListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   shelfEntry?: Prisma.ShelfEntryListRelationFilter
@@ -240,12 +256,14 @@ export type UserWhereInput = {
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  githubId?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   manhwas?: Prisma.ManhwaOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   shelfEntry?: Prisma.ShelfEntryOrderByRelationAggregateInput
@@ -254,29 +272,33 @@ export type UserOrderByWithRelationInput = {
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  email?: string
   googleId?: string
+  githubId?: string
   username?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  email?: Prisma.StringNullableFilter<"User"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringFilter<"User"> | string
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   manhwas?: Prisma.ManhwaListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   shelfEntry?: Prisma.ShelfEntryListRelationFilter
   reports?: Prisma.ReportListRelationFilter
-}, "id" | "googleId" | "username">
+}, "id" | "email" | "googleId" | "githubId" | "username">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  githubId?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -289,22 +311,26 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
-  email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  email?: Prisma.StringWithAggregatesFilter<"User"> | string
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   googleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  githubId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
-  avatarUrl?: Prisma.StringWithAggregatesFilter<"User"> | string
+  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
@@ -312,26 +338,30 @@ export type UserCreateInput = {
 
 export type UserUncheckedCreateInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
 
 export type UserUpdateInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
@@ -339,13 +369,15 @@ export type UserUpdateInput = {
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
@@ -353,31 +385,37 @@ export type UserUncheckedUpdateInput = {
 
 export type UserCreateManyInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -395,9 +433,11 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
+  githubId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -409,9 +449,11 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
+  githubId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -419,9 +461,11 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
+  githubId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -491,12 +535,14 @@ export type NullableStringFieldUpdateOperationsInput = {
 }
 
 export type UserCreateWithoutManhwasInput = {
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
@@ -504,12 +550,14 @@ export type UserCreateWithoutManhwasInput = {
 
 export type UserUncheckedCreateWithoutManhwasInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
@@ -532,12 +580,14 @@ export type UserUpdateToOneWithWhereWithoutManhwasInput = {
 }
 
 export type UserUpdateWithoutManhwasInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
@@ -545,38 +595,44 @@ export type UserUpdateWithoutManhwasInput = {
 
 export type UserUncheckedUpdateWithoutManhwasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
 }
@@ -598,51 +654,59 @@ export type UserUpdateToOneWithWhereWithoutReportsInput = {
 }
 
 export type UserUpdateWithoutReportsInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByInput
   shelfEntry?: Prisma.ShelfEntryCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByInput
   shelfEntry?: Prisma.ShelfEntryUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
@@ -664,51 +728,59 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type UserUpdateWithoutReviewsInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByNestedInput
   shelfEntry?: Prisma.ShelfEntryUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByNestedInput
   shelfEntry?: Prisma.ShelfEntryUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
 
 export type UserCreateWithoutShelfEntryInput = {
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
 }
 
 export type UserUncheckedCreateWithoutShelfEntryInput = {
   id?: number
-  email?: string | null
+  email: string
   passwordHash?: string | null
   googleId?: string | null
+  githubId?: string | null
   username: string
-  avatarUrl: string
+  avatarUrl?: string | null
   createdAt?: Date | string
-  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByUserIdInput
+  updatedAt?: Date | string
+  manhwas?: Prisma.ManhwaUncheckedCreateNestedManyWithoutAddedByInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
 }
@@ -730,26 +802,30 @@ export type UserUpdateToOneWithWhereWithoutShelfEntryInput = {
 }
 
 export type UserUpdateWithoutShelfEntryInput = {
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShelfEntryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByUserIdNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  manhwas?: Prisma.ManhwaUncheckedUpdateManyWithoutAddedByNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
 }
@@ -817,9 +893,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   passwordHash?: boolean
   googleId?: boolean
+  githubId?: boolean
   username?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   manhwas?: boolean | Prisma.User$manhwasArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   shelfEntry?: boolean | Prisma.User$shelfEntryArgs<ExtArgs>
@@ -832,9 +910,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   passwordHash?: boolean
   googleId?: boolean
+  githubId?: boolean
   username?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -842,9 +922,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   passwordHash?: boolean
   googleId?: boolean
+  githubId?: boolean
   username?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -852,12 +934,14 @@ export type UserSelectScalar = {
   email?: boolean
   passwordHash?: boolean
   googleId?: boolean
+  githubId?: boolean
   username?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "googleId" | "username" | "avatarUrl" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "googleId" | "githubId" | "username" | "avatarUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   manhwas?: boolean | Prisma.User$manhwasArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
@@ -878,12 +962,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    email: string | null
+    email: string
     passwordHash: string | null
     googleId: string | null
+    githubId: string | null
     username: string
-    avatarUrl: string
+    avatarUrl: string | null
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1315,9 +1401,11 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly googleId: Prisma.FieldRef<"User", 'String'>
+  readonly githubId: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

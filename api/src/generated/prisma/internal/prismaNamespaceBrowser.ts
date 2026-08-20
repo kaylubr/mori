@@ -55,6 +55,7 @@ export const ModelName = {
   Manhwa: 'Manhwa',
   Report: 'Report',
   Review: 'Review',
+  Session: 'Session',
   ShelfEntry: 'ShelfEntry',
   Tag: 'Tag',
   User: 'User'
@@ -93,7 +94,7 @@ export const ManhwaScalarFieldEnum = {
   thumbnailUrl: 'thumbnailUrl',
   status: 'status',
   latestChapterNumber: 'latestChapterNumber',
-  userId: 'userId',
+  addedByUserId: 'addedByUserId',
   createdAt: 'createdAt'
 } as const
 
@@ -125,6 +126,16 @@ export const ReviewScalarFieldEnum = {
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  sid: 'sid',
+  data: 'data',
+  expiresAt: 'expiresAt'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
 export const ShelfEntryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -149,9 +160,11 @@ export const UserScalarFieldEnum = {
   email: 'email',
   passwordHash: 'passwordHash',
   googleId: 'googleId',
+  githubId: 'githubId',
   username: 'username',
   avatarUrl: 'avatarUrl',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

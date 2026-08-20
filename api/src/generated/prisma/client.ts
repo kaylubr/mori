@@ -62,6 +62,11 @@ export type Report = Prisma.ReportModel
  */
 export type Review = Prisma.ReviewModel
 /**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
  * Model ShelfEntry
  * 
  */
