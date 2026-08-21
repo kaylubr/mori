@@ -5,6 +5,7 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store"
 
 import authRoutes from "./modules/auth/routes.js"
 import manhwaRoutes from "./modules/manhwa/routes.js"
+import shelfRoutes from "./modules/shelf/routes.js"
 import config from "./config/index.js"
 import { db } from "./lib/database.js"
 import "./modules/auth/passport.js"
@@ -37,5 +38,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use("/api/auth", authRoutes)
 app.use("/api/manhwa", manhwaRoutes)
+app.use("/api/shelf", shelfRoutes)
 
 export default app
