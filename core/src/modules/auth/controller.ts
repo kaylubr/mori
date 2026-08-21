@@ -3,9 +3,9 @@ import { ZodError } from "zod"
 
 import passport from "passport"
 
-import { db } from "../../lib/database.js"
 import { hashPassword } from "./password.js"
 import { registerSchema, loginSchema } from "./schema.js"
+import authService from "./service.js"
 
 const sanitizeUser = (user: any) => ({
   id: user.id,
@@ -20,23 +20,14 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const parsed = registerSchema.parse(req.body)
 
-    const existingUser = await db.user.findFirst({
-      where: { OR: [{ username: parsed.username }, { email: parsed.email }] },
-    })
+    const existingUser = await authService.findByUsernameOrEmail(parsed.username, parsed.email)
 
     if (existingUser) {
       return res.status(409).json({ error: "Username or email already exists" })
     }
 
     const passwordHash = await hashPassword(parsed.password)
-    const user = await db.user.create({
-      data: {
-        username: parsed.username,
-        email: parsed.email,
-        passwordHash,
-        avatarUrl: '',
-      },
-    })
+    const user = await authService.createUser(parsed.username, parsed.email, passwordHash)
 
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -115,15 +106,7 @@ const me = (req: Request, res: Response) => {
 }
 
 const getUsers = async (_req: Request, res: Response) => {
-  const users = await db.user.findMany({
-    omit: {
-      passwordHash: true,
-      googleId: true,
-      githubId: true,
-    },
-  })
-
-  return res.json(users)
+  return res.json(await authService.getUsers())
 }
 
 export default { register, login, logout, me, getUsers }
