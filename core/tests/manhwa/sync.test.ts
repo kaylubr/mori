@@ -61,4 +61,30 @@ describe("importManhwaFromMangaUpdates", () => {
 		}),
 	}))
 	})
+
+	it("accepts null metadata returned by MangaUpdates", async () => {
+		vi.mocked(searchSeries).mockResolvedValue({
+			total_hits: 1,
+			page: 1,
+			per_page: 50,
+			results: [{
+				record: {
+					...makeRecord(17360452316),
+					description: null,
+					bayesian_rating: null,
+					last_updated: {
+						timestamp: 1731307608,
+						as_rfc3339: null,
+						as_string: null,
+					},
+				},
+			}],
+		})
+
+		await importManhwaFromMangaUpdates()
+
+		expect(db.manhwa.upsert).toHaveBeenCalledWith(expect.objectContaining({
+			create: expect.objectContaining({ description: "" }),
+		}))
+	})
 })

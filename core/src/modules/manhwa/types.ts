@@ -30,22 +30,22 @@ const mangaUpdatesGenreSchema = z.object({ genre: z.string() })
 
 const mangaUpdatesLastUpdatedSchema = z.object({
   timestamp: z.number(),
-  as_rfc3339: z.string(),
-  as_string: z.string(),
+  as_rfc3339: z.string().nullable(),
+  as_string: z.string().nullable(),
 })
 
 export const mangaUpdatesSeriesSummarySchema = z.object({
   series_id: z.number(),
   title: z.string(),
   url: z.url(),
-  description: z.string().optional().default(""),
+  description: z.string().nullable().transform((description) => description ?? "").default(""),
   image: mangaUpdatesImageSchema.optional(),
   type: z.string(),
   year: z.string().optional(),
-  bayesian_rating: z.number().optional(),
-  rating_votes: z.number().optional(),
+  bayesian_rating: z.number().nullable().optional(),
+  rating_votes: z.number().nullable().optional(),
   genres: z.array(mangaUpdatesGenreSchema).optional().default([]),
-  last_updated: mangaUpdatesLastUpdatedSchema.optional(),
+  last_updated: mangaUpdatesLastUpdatedSchema.nullable().optional(),
 })
 
 export const mangaUpdatesSearchResponseSchema = z.object({
