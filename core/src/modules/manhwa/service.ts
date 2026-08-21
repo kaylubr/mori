@@ -1,55 +1,39 @@
-import { db } from "../../lib/database.js"
+import manhwaRepository from "./repository.js"
 
-const listManhwas = async (page: number, perPage: number) => {
-	const [manhwas, total] = await Promise.all([
-		db.manhwa.findMany({
-			skip: (page - 1) * perPage,
-			take: perPage,
-			orderBy: { title: "asc" },
-			select: { id: true, externalId: true, title: true, thumbnailUrl: true },
-		}),
-		db.manhwa.count(),
-	])
+const listManhwa = async (page: number, perPage: number) => {
+	const { manhwas, total } = await manhwaRepository.listManhwa({ page, perPage })
 
 	return {
 		total,
 		page,
 		perPage,
-		manhwas,
+		manhwas: manhwas.map(({ id, title, thumbnailUrl, status }) => ({
+			id,
+			title,
+			thumbnailUrl,
+			status,
+		})),
 	}
 }
 
-const getManhwa = async (externalId: string) => {
-	const manhwa = await db.manhwa.findUnique({
-		where: { externalId },
-		include: {
-			tags: true,
-			reviews: {
-				include: {
-					user: {
-						select: { id: true, username: true, avatarUrl: true },
-					},
-				},
-				orderBy: { createdAt: "desc" },
-			},
-			chapters: { orderBy: { chapterNumber: "desc" } },
-		},
-	})
+const getManhwaById = async (id: number) => {
+	const manhwa = await manhwaRepository.getManhwaById(id)
 
 	if (!manhwa) {
 		return null
 	}
 
 	return {
-		...manhwa,
-		comments: manhwa.reviews.map(({ id, comment, user, createdAt, updatedAt }) => ({
-			id,
-			comment,
-			user,
-			createdAt,
-			updatedAt,
+		id: manhwa.id,
+		title: manhwa.title,
+		description: manhwa.description,
+		thumbnailUrl: manhwa.thumbnailUrl,
+		status: manhwa.status,
+		tags: manhwa.tags.map(({ id: tagId, name }) => ({
+			id: tagId,
+			name,
 		})),
 	}
 }
 
-export default { listManhwas, getManhwa }
+export default { listManhwa, getManhwaById }

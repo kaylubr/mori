@@ -3,26 +3,16 @@ import session from "express-session"
 import { beforeEach, describe, expect, it, vi } from "vitest"
 
 import app from "../../src/app.js"
-import { db } from "../../src/lib/database.js"
+import manhwaRepository from "../../src/modules/manhwa/repository.js"
 
 vi.mock("@quixo3/prisma-session-store", () => ({
 	PrismaSessionStore: class extends session.MemoryStore {},
 }))
 
-vi.mock("../../src/lib/database.js", () => ({
-	db: {
-		manhwa: {
-			findMany: vi.fn(),
-			count: vi.fn(),
-			findUnique: vi.fn(),
-		},
-		user: {
-			findFirst: vi.fn(),
-			findUnique: vi.fn(),
-			create: vi.fn(),
-			update: vi.fn(),
-			findMany: vi.fn(),
-		},
+vi.mock("../../src/modules/manhwa/repository.js", () => ({
+	default: {
+		listManhwa: vi.fn(),
+		getManhwaById: vi.fn(),
 	},
 }))
 
@@ -31,53 +21,69 @@ describe("Manhwa endpoints", () => {
 		vi.clearAllMocks()
 	})
 
-	it("returns the imported manhwa list from Postgres", async () => {
-		vi.mocked(db.manhwa.findMany).mockResolvedValue([
-			{ id: 1, externalId: "40205318159", title: "Example Manhwa", thumbnailUrl: "https://cdn.example.com/thumb.jpg" },
-		] as never)
-		vi.mocked(db.manhwa.count).mockResolvedValue(1)
+	it("returns the requested page with public list fields", async () => {
+		vi.mocked(manhwaRepository.listManhwa).mockResolvedValue({
+			total: 2,
+			manhwas: [
+				{ id: 1, title: "Example Manhwa", thumbnailUrl: "https://cdn.example.com/thumb.jpg", status: "ONGOING" },
+			],
+		} as never)
 
-		const response = await request(app).get("/api/manhwa")
+		const response = await request(app).get("/api/manhwa?page=2&perPage=1")
 
 		expect(response.status).toBe(200)
-		expect(response.body.manhwas).toEqual([{
-			id: 1,
-			externalId: "40205318159",
-			title: "Example Manhwa",
-			thumbnailUrl: "https://cdn.example.com/thumb.jpg",
-		}])
-		expect(db.manhwa.findMany).toHaveBeenCalledWith(expect.objectContaining({ skip: 0, take: 50 }))
+		expect(response.body).toEqual({
+			total: 2,
+			page: 2,
+			perPage: 1,
+			manhwas: [{
+				id: 1,
+				title: "Example Manhwa",
+				thumbnailUrl: "https://cdn.example.com/thumb.jpg",
+				status: "ONGOING",
+			}],
+		})
+		expect(manhwaRepository.listManhwa).toHaveBeenCalledWith({ page: 2, perPage: 1 })
 	})
 
-	it("returns one imported manhwa with reviews, comments, and attribution", async () => {
-		vi.mocked(db.manhwa.findUnique).mockResolvedValue({
+	it("rejects a page size over the configured cap", async () => {
+		vi.mocked(manhwaRepository.listManhwa).mockResolvedValue({ total: 0, manhwas: [] } as never)
+
+		const response = await request(app).get("/api/manhwa?perPage=101")
+
+		expect(response.status).toBe(400)
+		expect(manhwaRepository.listManhwa).not.toHaveBeenCalled()
+	})
+
+	it("returns detail with description and tags", async () => {
+		vi.mocked(manhwaRepository.getManhwaById).mockResolvedValue({
 			id: 1,
-			externalId: "40205318159",
 			title: "Example Manhwa",
 			description: "A detailed description.",
 			thumbnailUrl: "https://cdn.example.com/original.jpg",
+			status: "ONGOING",
 			tags: [{ id: 1, name: "Romance" }],
-			reviews: [],
-			chapters: [],
 		} as never)
 
-		const response = await request(app).get("/api/manhwa/40205318159")
+		const response = await request(app).get("/api/manhwa/1")
 
 		expect(response.status).toBe(200)
-		expect(response.body.manhwa).toMatchObject({
-			externalId: "40205318159",
+		expect(response.body.manhwa).toEqual({
+			id: 1,
 			title: "Example Manhwa",
 			description: "A detailed description.",
-			reviews: [],
+			thumbnailUrl: "https://cdn.example.com/original.jpg",
+			status: "ONGOING",
+			tags: [{ id: 1, name: "Romance" }],
 		})
 		expect(response.body.attribution).toBe("Data from MangaUpdates")
-		expect(db.manhwa.findUnique).toHaveBeenCalledWith(expect.objectContaining({ where: { externalId: "40205318159" } }))
+		expect(manhwaRepository.getManhwaById).toHaveBeenCalledWith(1)
 	})
 
-	it("returns 404 for an unimported manhwa", async () => {
-		vi.mocked(db.manhwa.findUnique).mockResolvedValue(null)
+	it("returns 404 when the manhwa does not exist", async () => {
+		vi.mocked(manhwaRepository.getManhwaById).mockResolvedValue(null)
 
-		const response = await request(app).get("/api/manhwa/40205318159")
+		const response = await request(app).get("/api/manhwa/999")
 
 		expect(response.status).toBe(404)
 		expect(response.body.error).toBe("Manhwa not found")
