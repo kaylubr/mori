@@ -1,20 +1,11 @@
 import type { Request, Response, NextFunction } from "express"
+import { ZodError } from "zod"
+
 import passport from "passport"
-import { ZodError, z } from "zod"
 
 import { db } from "../../lib/database.js"
 import { hashPassword } from "./password.js"
-
-const registerSchema = z.object({
-  username: z.string().min(1),
-  email: z.email(),
-  password: z.string().min(8),
-})
-
-const loginSchema = z.object({
-  username: z.string().min(1),
-  password: z.string().min(1),
-})
+import { registerSchema, loginSchema } from "./schema.js"
 
 const sanitizeUser = (user: any) => ({
   id: user.id,
