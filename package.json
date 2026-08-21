@@ -17,7 +17,10 @@
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:up": "docker compose --env-file ./core/.env up -d",
+    "db:down": "docker compose --env-file ./core/.env down",
+    "db:logs": "docker compose --env-file ./core/.env logs -f"
   },
   "devDependencies": {
     "prettier": "^3.9.6"
