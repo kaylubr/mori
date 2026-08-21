@@ -3,11 +3,12 @@ import { ZodError } from "zod"
 
 import passport from "passport"
 
+import type { User } from "../../../types/user.js"
 import { hashPassword } from "./password.js"
 import { registerSchema, loginSchema } from "./schema.js"
 import authService from "./service.js"
 
-const sanitizeUser = (user: any) => ({
+const sanitizeUser = (user: User) => ({
   id: user.id,
   email: user.email,
   username: user.username,
@@ -51,7 +52,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     return res.status(400).json({ error: "Invalid username or password" })
   }
 
-  return passport.authenticate("local", (authError: unknown, user: any, info?: any) => {
+  return passport.authenticate("local", (authError: unknown, user: User | false | undefined, info?: { code?: string }) => {
     if (authError) {
       return next(authError)
     }
@@ -102,7 +103,7 @@ const me = (req: Request, res: Response) => {
     return res.status(401).json({ error: "Not authenticated" })
   }
 
-  return res.json({ user: sanitizeUser(req.user) })
+  return res.json({ user: sanitizeUser(req.user as User) })
 }
 
 const getUsers = async (_req: Request, res: Response) => {

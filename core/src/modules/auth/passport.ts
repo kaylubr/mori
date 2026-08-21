@@ -1,14 +1,16 @@
 import passport from "passport"
-import { Strategy as LocalStrategy } from "passport-local"
+import { Strategy as LocalStrategy, type IVerifyOptions } from "passport-local"
 import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 import { Strategy as GitHubStrategy } from "passport-github2"
 
 import { db } from "../../lib/database.js"
 import config from "../../config/index.js"
+import { userSchema, type User } from "../../../types/user.js"
 import { verifyPassword } from "./password.js"
+import { oauthProfileSchema, type OAuthProfile } from "./schema.js"
 
-passport.serializeUser((user: any, done) => {
-  done(null, user.id)
+passport.serializeUser((user, done) => {
+  done(null, userSchema.parse(user).id)
 })
 
 passport.deserializeUser(async (id: number, done) => {
@@ -21,24 +23,24 @@ passport.deserializeUser(async (id: number, done) => {
 })
 
 passport.use(
-  new LocalStrategy(async (username: string, password: string, done: (error: Error | null, user?: any, info?: any) => void) => {
+  new LocalStrategy(async (username: string, password: string, done: (error: Error | null, user?: User | false, info?: IVerifyOptions & { code?: string }) => void) => {
     try {
       const user = await db.user.findUnique({ where: { username } })
 
       if (!user) {
         // No such account
-        return done(null, false, { code: "no-account" })
+        return done(null, false, { code: "no-account", message: "Account doesn't exist" })
       }
 
       if (!user.passwordHash) {
         // Account exists but has no password (OAuth-only)
-        return done(null, false, { code: "passwordless" })
+        return done(null, false, { code: "passwordless", message: "Passwordless account" })
       }
 
       const isValid = await verifyPassword(password, user.passwordHash)
       if (!isValid) {
         // Wrong password for existing account
-        return done(null, false, { code: "invalid-credentials" })
+        return done(null, false, { code: "invalid-credentials", message: "Invalid credentials" })
       }
 
       return done(null, user)
@@ -51,23 +53,24 @@ passport.use(
 export const googleVerify = async (
   _accessToken: string,
   _refreshToken: string,
-  profile: any,
-  done: (error: Error | null, user?: any, info?: any) => void,
+  profile: OAuthProfile,
+  done: (error: Error | null, user?: User | false, info?: { code: string }) => void,
 ) => {
   try {
-    const email = profile.emails?.[0]?.value
+    const parsedProfile = oauthProfileSchema.parse(profile)
+    const email = parsedProfile.emails?.[0]?.value
     if (!email) {
       return done(new Error("Google account has no email"))
     }
 
-    let user = await db.user.findUnique({ where: { googleId: profile.id } })
+    let user = await db.user.findUnique({ where: { googleId: parsedProfile.id } })
     if (user) return done(null, user)
 
     user = await db.user.findFirst({ where: { email } })
     if (user) {
       user = await db.user.update({
         where: { id: user.id },
-        data: { googleId: profile.id, avatarUrl: profile.photos?.[0]?.value ?? user.avatarUrl ?? undefined },
+        data: { googleId: parsedProfile.id, avatarUrl: parsedProfile.photos?.[0]?.value ?? user.avatarUrl ?? null },
       })
       return done(null, user)
     }
@@ -79,9 +82,9 @@ export const googleVerify = async (
       data: {
         email,
         username,
-        googleId: profile.id,
+        googleId: parsedProfile.id,
         passwordHash: null,
-        avatarUrl: profile.photos?.[0]?.value ?? undefined,
+        avatarUrl: parsedProfile.photos?.[0]?.value ?? null,
       },
     })
 
@@ -107,23 +110,24 @@ if (config.GOOGLE_CLIENT_ID && config.GOOGLE_CLIENT_SECRET) {
 export const githubVerify = async (
   _accessToken: string,
   _refreshToken: string,
-  profile: any,
-  done: (error: Error | null, user?: any, info?: any) => void,
+  profile: OAuthProfile,
+  done: (error: Error | null, user?: User | false, info?: { code: string }) => void,
 ) => {
   try {
-    const email = profile.emails?.[0]?.value ?? profile._json?.email
+    const parsedProfile = oauthProfileSchema.parse(profile)
+    const email = parsedProfile.emails?.[0]?.value ?? parsedProfile._json?.email
     if (!email) {
       return done(new Error("GitHub account has no email"))
     }
 
-    let user = await db.user.findUnique({ where: { githubId: profile.id } })
+    let user = await db.user.findUnique({ where: { githubId: parsedProfile.id } })
     if (user) return done(null, user)
 
     user = await db.user.findFirst({ where: { email } })
     if (user) {
       user = await db.user.update({
         where: { id: user.id },
-        data: { githubId: profile.id, avatarUrl: profile.photos?.[0]?.value ?? profile._json?.avatar_url ?? user.avatarUrl ?? undefined },
+        data: { githubId: parsedProfile.id, avatarUrl: parsedProfile.photos?.[0]?.value ?? parsedProfile._json?.avatar_url ?? user.avatarUrl ?? null },
       })
       return done(null, user)
     }
@@ -135,9 +139,9 @@ export const githubVerify = async (
       data: {
         email,
         username,
-        githubId: profile.id,
+        githubId: parsedProfile.id,
         passwordHash: null,
-        avatarUrl: profile.photos?.[0]?.value ?? profile._json?.avatar_url ?? undefined,
+        avatarUrl: parsedProfile.photos?.[0]?.value ?? parsedProfile._json?.avatar_url ?? null,
       },
     })
 
