@@ -1,39 +1,54 @@
-import {
-	mangaUpdatesSearchRequestSchema,
-	mangaUpdatesSearchResponseSchema,
-	mangaUpdatesSeriesSchema,
-} from "./types.js"
-import { getSeries, searchSeries } from "../../lib/mangaUpdatesClient.js"
+import { db } from "../../lib/database.js"
 
 const listManhwas = async (page: number, perPage: number) => {
-	const request = mangaUpdatesSearchRequestSchema.parse({ type: ["Manhwa"], page, perpage: perPage })
-	const response = mangaUpdatesSearchResponseSchema.parse(await searchSeries(request))
+	const [manhwas, total] = await Promise.all([
+		db.manhwa.findMany({
+			skip: (page - 1) * perPage,
+			take: perPage,
+			orderBy: { title: "asc" },
+			select: { id: true, externalId: true, title: true, thumbnailUrl: true },
+		}),
+		db.manhwa.count(),
+	])
 
 	return {
-		total: response.total_hits,
-		page: response.page,
-		perPage: response.per_page,
-		manhwas: response.results.map(({ record }) => ({
-			seriesId: record.series_id,
-			title: record.title,
-			thumbnailUrl: record.image?.url.thumb ?? null,
-		})),
+		total,
+		page,
+		perPage,
+		manhwas,
 	}
 }
 
-const getManhwa = async (seriesId: number) => {
-	const series = mangaUpdatesSeriesSchema.parse(await getSeries(seriesId))
+const getManhwa = async (externalId: string) => {
+	const manhwa = await db.manhwa.findUnique({
+		where: { externalId },
+		include: {
+			tags: true,
+			reviews: {
+				include: {
+					user: {
+						select: { id: true, username: true, avatarUrl: true },
+					},
+				},
+				orderBy: { createdAt: "desc" },
+			},
+			chapters: { orderBy: { chapterNumber: "desc" } },
+		},
+	})
+
+	if (!manhwa) {
+		return null
+	}
 
 	return {
-		seriesId: series.series_id,
-		title: series.title,
-		description: series.description,
-		thumbnailUrl: series.image?.url.original ?? null,
-		sourceUrl: series.url,
-		latestChapter: series.latest_chapter,
-		status: series.status ?? null,
-		reviews: [],
-		comments: [],
+		...manhwa,
+		comments: manhwa.reviews.map(({ id, comment, user, createdAt, updatedAt }) => ({
+			id,
+			comment,
+			user,
+			createdAt,
+			updatedAt,
+		})),
 	}
 }
 

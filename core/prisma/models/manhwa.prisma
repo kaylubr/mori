@@ -1,13 +1,14 @@
 model Manhwa {
-  id                  Int          @id @default(autoincrement())
+  id                  Int      @id @default(autoincrement())
+  externalId          String?  @unique
   title               String
   description         String
   thumbnailUrl        String
-  status              Status       @default(ONGOING)
+  status              Status   @default(ONGOING)
   latestChapterNumber Int
-  addedBy             User?        @relation(fields: [addedByUserId], references: [id])
+  addedBy             User?    @relation(fields: [addedByUserId], references: [id])
   addedByUserId       Int?
-  createdAt           DateTime     @default(now())
+  createdAt           DateTime @default(now())
 
   reviews    Review[]
   tags       Tag[]

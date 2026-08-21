@@ -89,6 +89,7 @@ export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeo
 
 export const ManhwaScalarFieldEnum = {
   id: 'id',
+  externalId: 'externalId',
   title: 'title',
   description: 'description',
   thumbnailUrl: 'thumbnailUrl',

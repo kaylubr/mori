@@ -19,8 +19,14 @@ const list = async (req: Request, res: Response, next: NextFunction) => {
 
 const get = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { seriesId } = manhwaParamsSchema.parse(req.params)
-		return res.json({ manhwa: await manhwaService.getManhwa(seriesId) })
+		const { externalId } = manhwaParamsSchema.parse(req.params)
+		const manhwa = await manhwaService.getManhwa(externalId)
+
+		if (!manhwa) {
+			return res.status(404).json({ error: "Manhwa not found" })
+		}
+
+		return res.json({ manhwa, attribution: "Data from MangaUpdates" })
 	} catch (error) {
 		if (error instanceof ZodError) {
 			return res.status(400).json({ error: "Invalid series id" })

@@ -18,7 +18,3 @@ export const searchSeries = async (body: MangaUpdatesSearchRequest): Promise<unk
     body: JSON.stringify(body),
   })
 }
-
-export const getSeries = async (seriesId: number): Promise<unknown> => {
-  return await request(`${config.MANGAUPDATES_BASE_URL}/series/${seriesId}`)
-}

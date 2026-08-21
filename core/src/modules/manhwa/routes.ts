@@ -4,6 +4,6 @@ import manhwaController from "./controller.js"
 const manhwaRoutes = express.Router()
 
 manhwaRoutes.get("/", manhwaController.list)
-manhwaRoutes.get("/:seriesId", manhwaController.get)
+manhwaRoutes.get("/:externalId", manhwaController.get)
 
 export default manhwaRoutes

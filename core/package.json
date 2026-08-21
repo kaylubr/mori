@@ -13,7 +13,8 @@
     "tsc": "tsc",
     "dev": "cross-env NODE_ENV=development tsx watch ./src/index.ts",
     "start": "cross-env NODE_ENV=production node ./dist/index.js",
-    "test": "cross-env NODE_ENV=testing vitest"
+    "test": "cross-env NODE_ENV=testing vitest",
+    "sync:manhwa": "tsx ./scripts/syncManhwa.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

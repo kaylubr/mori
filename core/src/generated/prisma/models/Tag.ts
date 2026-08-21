@@ -203,12 +203,12 @@ export type TagOrderByWithRelationInput = {
 
 export type TagWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   OR?: Prisma.TagWhereInput[]
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
-  name?: Prisma.StringFilter<"Tag"> | string
   manhwas?: Prisma.ManhwaListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type TagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

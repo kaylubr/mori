@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const mangaUpdatesSearchRequestSchema = z.object({
+  search: z.string(),
   type: z.array(z.literal("Manhwa")).min(1),
   page: z.number().int().positive(),
   perpage: z.number().int().positive().max(50),
@@ -14,7 +15,7 @@ export const manhwaListQuerySchema = z.object({
 })
 
 export const manhwaParamsSchema = z.object({
-  seriesId: z.coerce.number().int().positive(),
+  externalId: z.string().min(1),
 })
 
 const mangaUpdatesImageSchema = z.object({
@@ -78,7 +79,7 @@ export const manhwaListItemSchema = z.object({
 })
 
 export const manhwaDetailSchema = z.object({
-  seriesId: z.number(),
+  externalId: z.string(),
   title: z.string(),
   description: z.string(),
   thumbnailUrl: z.string().nullable(),
@@ -88,3 +89,11 @@ export const manhwaDetailSchema = z.object({
   reviews: z.array(z.unknown()),
   comments: z.array(z.unknown()),
 })
+
+export type MappedManhwa = {
+  title: string
+  description: string
+  thumbnailUrl: string
+  externalId: string
+  genres: string[]
+}

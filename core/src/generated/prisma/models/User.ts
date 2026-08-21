@@ -530,10 +530,6 @@ export type UserUpdateOneRequiredWithoutShelfEntryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutShelfEntryInput, Prisma.UserUpdateWithoutShelfEntryInput>, Prisma.UserUncheckedUpdateWithoutShelfEntryInput>
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type UserCreateWithoutManhwasInput = {
   email: string
   passwordHash?: string | null

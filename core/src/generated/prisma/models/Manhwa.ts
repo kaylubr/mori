@@ -40,6 +40,7 @@ export type ManhwaSumAggregateOutputType = {
 
 export type ManhwaMinAggregateOutputType = {
   id: number | null
+  externalId: string | null
   title: string | null
   description: string | null
   thumbnailUrl: string | null
@@ -51,6 +52,7 @@ export type ManhwaMinAggregateOutputType = {
 
 export type ManhwaMaxAggregateOutputType = {
   id: number | null
+  externalId: string | null
   title: string | null
   description: string | null
   thumbnailUrl: string | null
@@ -62,6 +64,7 @@ export type ManhwaMaxAggregateOutputType = {
 
 export type ManhwaCountAggregateOutputType = {
   id: number
+  externalId: number
   title: number
   description: number
   thumbnailUrl: number
@@ -87,6 +90,7 @@ export type ManhwaSumAggregateInputType = {
 
 export type ManhwaMinAggregateInputType = {
   id?: true
+  externalId?: true
   title?: true
   description?: true
   thumbnailUrl?: true
@@ -98,6 +102,7 @@ export type ManhwaMinAggregateInputType = {
 
 export type ManhwaMaxAggregateInputType = {
   id?: true
+  externalId?: true
   title?: true
   description?: true
   thumbnailUrl?: true
@@ -109,6 +114,7 @@ export type ManhwaMaxAggregateInputType = {
 
 export type ManhwaCountAggregateInputType = {
   id?: true
+  externalId?: true
   title?: true
   description?: true
   thumbnailUrl?: true
@@ -207,6 +213,7 @@ export type ManhwaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type ManhwaGroupByOutputType = {
   id: number
+  externalId: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -241,6 +248,7 @@ export type ManhwaWhereInput = {
   OR?: Prisma.ManhwaWhereInput[]
   NOT?: Prisma.ManhwaWhereInput | Prisma.ManhwaWhereInput[]
   id?: Prisma.IntFilter<"Manhwa"> | number
+  externalId?: Prisma.StringNullableFilter<"Manhwa"> | string | null
   title?: Prisma.StringFilter<"Manhwa"> | string
   description?: Prisma.StringFilter<"Manhwa"> | string
   thumbnailUrl?: Prisma.StringFilter<"Manhwa"> | string
@@ -257,6 +265,7 @@ export type ManhwaWhereInput = {
 
 export type ManhwaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
@@ -273,6 +282,7 @@ export type ManhwaOrderByWithRelationInput = {
 
 export type ManhwaWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  externalId?: string
   AND?: Prisma.ManhwaWhereInput | Prisma.ManhwaWhereInput[]
   OR?: Prisma.ManhwaWhereInput[]
   NOT?: Prisma.ManhwaWhereInput | Prisma.ManhwaWhereInput[]
@@ -288,10 +298,11 @@ export type ManhwaWhereUniqueInput = Prisma.AtLeast<{
   tags?: Prisma.TagListRelationFilter
   chapters?: Prisma.ChapterListRelationFilter
   shelfEntry?: Prisma.ShelfEntryListRelationFilter
-}, "id">
+}, "id" | "externalId">
 
 export type ManhwaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
@@ -311,6 +322,7 @@ export type ManhwaScalarWhereWithAggregatesInput = {
   OR?: Prisma.ManhwaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ManhwaScalarWhereWithAggregatesInput | Prisma.ManhwaScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Manhwa"> | number
+  externalId?: Prisma.StringNullableWithAggregatesFilter<"Manhwa"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Manhwa"> | string
   description?: Prisma.StringWithAggregatesFilter<"Manhwa"> | string
   thumbnailUrl?: Prisma.StringWithAggregatesFilter<"Manhwa"> | string
@@ -321,6 +333,7 @@ export type ManhwaScalarWhereWithAggregatesInput = {
 }
 
 export type ManhwaCreateInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -336,6 +349,7 @@ export type ManhwaCreateInput = {
 
 export type ManhwaUncheckedCreateInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -350,6 +364,7 @@ export type ManhwaUncheckedCreateInput = {
 }
 
 export type ManhwaUpdateInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -365,6 +380,7 @@ export type ManhwaUpdateInput = {
 
 export type ManhwaUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -380,6 +396,7 @@ export type ManhwaUncheckedUpdateInput = {
 
 export type ManhwaCreateManyInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -390,6 +407,7 @@ export type ManhwaCreateManyInput = {
 }
 
 export type ManhwaUpdateManyMutationInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -400,6 +418,7 @@ export type ManhwaUpdateManyMutationInput = {
 
 export type ManhwaUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -416,6 +435,7 @@ export type ManhwaScalarRelationFilter = {
 
 export type ManhwaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
@@ -433,6 +453,7 @@ export type ManhwaAvgOrderByAggregateInput = {
 
 export type ManhwaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
@@ -444,6 +465,7 @@ export type ManhwaMaxOrderByAggregateInput = {
 
 export type ManhwaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  externalId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
@@ -481,6 +503,10 @@ export type ManhwaUpdateOneRequiredWithoutChaptersNestedInput = {
   upsert?: Prisma.ManhwaUpsertWithoutChaptersInput
   connect?: Prisma.ManhwaWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ManhwaUpdateToOneWithWhereWithoutChaptersInput, Prisma.ManhwaUpdateWithoutChaptersInput>, Prisma.ManhwaUncheckedUpdateWithoutChaptersInput>
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type EnumStatusFieldUpdateOperationsInput = {
@@ -608,6 +634,7 @@ export type ManhwaUncheckedUpdateManyWithoutAddedByNestedInput = {
 }
 
 export type ManhwaCreateWithoutChaptersInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -622,6 +649,7 @@ export type ManhwaCreateWithoutChaptersInput = {
 
 export type ManhwaUncheckedCreateWithoutChaptersInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -651,6 +679,7 @@ export type ManhwaUpdateToOneWithWhereWithoutChaptersInput = {
 }
 
 export type ManhwaUpdateWithoutChaptersInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -665,6 +694,7 @@ export type ManhwaUpdateWithoutChaptersInput = {
 
 export type ManhwaUncheckedUpdateWithoutChaptersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -678,6 +708,7 @@ export type ManhwaUncheckedUpdateWithoutChaptersInput = {
 }
 
 export type ManhwaCreateWithoutReviewsInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -692,6 +723,7 @@ export type ManhwaCreateWithoutReviewsInput = {
 
 export type ManhwaUncheckedCreateWithoutReviewsInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -721,6 +753,7 @@ export type ManhwaUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type ManhwaUpdateWithoutReviewsInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -735,6 +768,7 @@ export type ManhwaUpdateWithoutReviewsInput = {
 
 export type ManhwaUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -748,6 +782,7 @@ export type ManhwaUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type ManhwaCreateWithoutShelfEntryInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -762,6 +797,7 @@ export type ManhwaCreateWithoutShelfEntryInput = {
 
 export type ManhwaUncheckedCreateWithoutShelfEntryInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -791,6 +827,7 @@ export type ManhwaUpdateToOneWithWhereWithoutShelfEntryInput = {
 }
 
 export type ManhwaUpdateWithoutShelfEntryInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -805,6 +842,7 @@ export type ManhwaUpdateWithoutShelfEntryInput = {
 
 export type ManhwaUncheckedUpdateWithoutShelfEntryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -818,6 +856,7 @@ export type ManhwaUncheckedUpdateWithoutShelfEntryInput = {
 }
 
 export type ManhwaCreateWithoutTagsInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -832,6 +871,7 @@ export type ManhwaCreateWithoutTagsInput = {
 
 export type ManhwaUncheckedCreateWithoutTagsInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -870,6 +910,7 @@ export type ManhwaScalarWhereInput = {
   OR?: Prisma.ManhwaScalarWhereInput[]
   NOT?: Prisma.ManhwaScalarWhereInput | Prisma.ManhwaScalarWhereInput[]
   id?: Prisma.IntFilter<"Manhwa"> | number
+  externalId?: Prisma.StringNullableFilter<"Manhwa"> | string | null
   title?: Prisma.StringFilter<"Manhwa"> | string
   description?: Prisma.StringFilter<"Manhwa"> | string
   thumbnailUrl?: Prisma.StringFilter<"Manhwa"> | string
@@ -880,6 +921,7 @@ export type ManhwaScalarWhereInput = {
 }
 
 export type ManhwaCreateWithoutAddedByInput = {
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -894,6 +936,7 @@ export type ManhwaCreateWithoutAddedByInput = {
 
 export type ManhwaUncheckedCreateWithoutAddedByInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -933,6 +976,7 @@ export type ManhwaUpdateManyWithWhereWithoutAddedByInput = {
 }
 
 export type ManhwaUpdateWithoutTagsInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -947,6 +991,7 @@ export type ManhwaUpdateWithoutTagsInput = {
 
 export type ManhwaUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -961,6 +1006,7 @@ export type ManhwaUncheckedUpdateWithoutTagsInput = {
 
 export type ManhwaUncheckedUpdateManyWithoutTagsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -972,6 +1018,7 @@ export type ManhwaUncheckedUpdateManyWithoutTagsInput = {
 
 export type ManhwaCreateManyAddedByInput = {
   id?: number
+  externalId?: string | null
   title: string
   description: string
   thumbnailUrl: string
@@ -981,6 +1028,7 @@ export type ManhwaCreateManyAddedByInput = {
 }
 
 export type ManhwaUpdateWithoutAddedByInput = {
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -995,6 +1043,7 @@ export type ManhwaUpdateWithoutAddedByInput = {
 
 export type ManhwaUncheckedUpdateWithoutAddedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1009,6 +1058,7 @@ export type ManhwaUncheckedUpdateWithoutAddedByInput = {
 
 export type ManhwaUncheckedUpdateManyWithoutAddedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1077,6 +1127,7 @@ export type ManhwaCountOutputTypeCountShelfEntryArgs<ExtArgs extends runtime.Typ
 
 export type ManhwaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   title?: boolean
   description?: boolean
   thumbnailUrl?: boolean
@@ -1094,6 +1145,7 @@ export type ManhwaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 
 export type ManhwaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   title?: boolean
   description?: boolean
   thumbnailUrl?: boolean
@@ -1106,6 +1158,7 @@ export type ManhwaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type ManhwaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  externalId?: boolean
   title?: boolean
   description?: boolean
   thumbnailUrl?: boolean
@@ -1118,6 +1171,7 @@ export type ManhwaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type ManhwaSelectScalar = {
   id?: boolean
+  externalId?: boolean
   title?: boolean
   description?: boolean
   thumbnailUrl?: boolean
@@ -1127,7 +1181,7 @@ export type ManhwaSelectScalar = {
   createdAt?: boolean
 }
 
-export type ManhwaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "thumbnailUrl" | "status" | "latestChapterNumber" | "addedByUserId" | "createdAt", ExtArgs["result"]["manhwa"]>
+export type ManhwaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "externalId" | "title" | "description" | "thumbnailUrl" | "status" | "latestChapterNumber" | "addedByUserId" | "createdAt", ExtArgs["result"]["manhwa"]>
 export type ManhwaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addedBy?: boolean | Prisma.Manhwa$addedByArgs<ExtArgs>
   reviews?: boolean | Prisma.Manhwa$reviewsArgs<ExtArgs>
@@ -1154,6 +1208,7 @@ export type $ManhwaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    externalId: string | null
     title: string
     description: string
     thumbnailUrl: string
@@ -1590,6 +1645,7 @@ export interface Prisma__ManhwaClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface ManhwaFieldRefs {
   readonly id: Prisma.FieldRef<"Manhwa", 'Int'>
+  readonly externalId: Prisma.FieldRef<"Manhwa", 'String'>
   readonly title: Prisma.FieldRef<"Manhwa", 'String'>
   readonly description: Prisma.FieldRef<"Manhwa", 'String'>
   readonly thumbnailUrl: Prisma.FieldRef<"Manhwa", 'String'>
