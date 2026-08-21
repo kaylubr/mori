@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 
 import app from "../../src/app.js"
 import manhwaRepository from "../../src/modules/manhwa/repository.js"
+import reviewService from "../../src/modules/review/service.js"
 
 vi.mock("@quixo3/prisma-session-store", () => ({
 	PrismaSessionStore: class extends session.MemoryStore {},
@@ -16,9 +17,14 @@ vi.mock("../../src/modules/manhwa/repository.js", () => ({
 	},
 }))
 
+vi.mock("../../src/modules/review/service.js", () => ({
+	default: { getReviewSummaryForManhwa: vi.fn() },
+}))
+
 describe("Manhwa endpoints", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
+		vi.mocked(reviewService.getReviewSummaryForManhwa).mockResolvedValue({ averageRating: null, reviewCount: 0, reviews: [] })
 	})
 
 	it("returns the requested page with public list fields", async () => {
@@ -56,6 +62,11 @@ describe("Manhwa endpoints", () => {
 	})
 
 	it("returns detail with description and tags", async () => {
+		vi.mocked(reviewService.getReviewSummaryForManhwa).mockResolvedValue({
+			averageRating: 4.5,
+			reviewCount: 2,
+			reviews: [{ id: 2, rating: 5, comment: "Excellent" }],
+		} as never)
 		vi.mocked(manhwaRepository.getManhwaById).mockResolvedValue({
 			id: 1,
 			title: "Example Manhwa",
@@ -75,6 +86,9 @@ describe("Manhwa endpoints", () => {
 			thumbnailUrl: "https://cdn.example.com/original.jpg",
 			status: "ONGOING",
 			tags: [{ id: 1, name: "Romance" }],
+			averageRating: 4.5,
+			reviewCount: 2,
+			reviews: [{ id: 2, rating: 5, comment: "Excellent" }],
 		})
 		expect(response.body.attribution).toBe("Data from MangaUpdates")
 		expect(manhwaRepository.getManhwaById).toHaveBeenCalledWith(1)

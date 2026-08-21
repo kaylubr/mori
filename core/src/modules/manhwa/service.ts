@@ -1,4 +1,5 @@
 import manhwaRepository from "./repository.js"
+import reviewService from "../review/service.js"
 
 const listManhwa = async (page: number, perPage: number) => {
 	const { manhwas, total } = await manhwaRepository.listManhwa({ page, perPage })
@@ -23,6 +24,8 @@ const getManhwaById = async (id: number) => {
 		return null
 	}
 
+	const reviewSummary = await reviewService.getReviewSummaryForManhwa(manhwa.id)
+
 	return {
 		id: manhwa.id,
 		title: manhwa.title,
@@ -33,6 +36,9 @@ const getManhwaById = async (id: number) => {
 			id: tagId,
 			name,
 		})),
+		averageRating: reviewSummary.averageRating,
+		reviewCount: reviewSummary.reviewCount,
+		reviews: reviewSummary.reviews,
 	}
 }
 
