@@ -8,7 +8,6 @@ import {
 
 export const buildSearchRequest = (page = 1, perPage = 50) => {
 	return mangaUpdatesSearchRequestSchema.parse({
-		search: "",
 		type: ["Manhwa"],
 		page,
 		perpage: perPage,

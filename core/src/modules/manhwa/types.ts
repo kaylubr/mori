@@ -1,7 +1,6 @@
 import { z } from "zod"
 
 export const mangaUpdatesSearchRequestSchema = z.object({
-  search: z.string(),
   type: z.array(z.literal("Manhwa")).min(1),
   page: z.number().int().positive(),
   perpage: z.number().int().positive().max(50),

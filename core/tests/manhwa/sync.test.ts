@@ -44,14 +44,14 @@ describe("importManhwaFromMangaUpdates", () => {
 	})
 
 	it("builds the default MangaUpdates search request", () => {
-		expect(buildSearchRequest()).toEqual({ search: "", type: ["Manhwa"], page: 1, perpage: 50 })
+		expect(buildSearchRequest()).toEqual({ type: ["Manhwa"], page: 1, perpage: 50 })
 	})
 
 	it("upserts 50 records with connected genres and is safe to rerun", async () => {
 		await importManhwaFromMangaUpdates()
 		await importManhwaFromMangaUpdates()
 
-		expect(searchSeries).toHaveBeenCalledWith({ search: "", type: ["Manhwa"], page: 1, perpage: 50 })
+		expect(searchSeries).toHaveBeenCalledWith({ type: ["Manhwa"], page: 1, perpage: 50 })
 		expect(db.manhwa.upsert).toHaveBeenCalledTimes(100)
 		expect(db.manhwa.upsert).toHaveBeenCalledWith(expect.objectContaining({
 		where: { externalId: "17360452316" },

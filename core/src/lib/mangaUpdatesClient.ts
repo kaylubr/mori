@@ -5,7 +5,8 @@ const request = async (url: string, init?: RequestInit): Promise<unknown> => {
   const response = await fetch(url, init)
 
   if (!response.ok) {
-    throw new Error(`MangaUpdates request failed with status ${response.status}`)
+    const details = await response.text()
+    throw new Error(`MangaUpdates request failed with status ${response.status}: ${details}`)
   }
 
   return await response.json()
