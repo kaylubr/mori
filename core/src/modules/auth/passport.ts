@@ -5,7 +5,7 @@ import { Strategy as GitHubStrategy } from "passport-github2"
 
 import { db } from "../../lib/database.js"
 import config from "../../config/index.js"
-import { userSchema, type User } from "../../../types/user.js"
+import { userSchema, type User } from "./types.js"
 import { verifyPassword } from "./password.js"
 import { oauthProfileSchema, type OAuthProfile } from "./schema.js"
 

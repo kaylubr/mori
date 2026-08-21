@@ -1,5 +1,5 @@
 import config from "../config/index.js"
-import type { MangaUpdatesSearchRequest } from "../../types/manhwa.js"
+import type { MangaUpdatesSearchRequest } from "../modules/manhwa/types.js"
 
 const request = async (url: string, init?: RequestInit): Promise<unknown> => {
   const response = await fetch(url, init)

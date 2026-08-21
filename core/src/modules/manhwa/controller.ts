@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express"
 import { ZodError } from "zod"
 
-import { manhwaListQuerySchema, manhwaParamsSchema } from "../../../types/manhwa.js"
+import { manhwaListQuerySchema, manhwaParamsSchema } from "./types.js"
 import manhwaService from "./service.js"
 
 const list = async (req: Request, res: Response, next: NextFunction) => {

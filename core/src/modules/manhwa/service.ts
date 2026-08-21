@@ -2,7 +2,7 @@ import {
 	mangaUpdatesSearchRequestSchema,
 	mangaUpdatesSearchResponseSchema,
 	mangaUpdatesSeriesSchema,
-} from "../../../types/manhwa.js"
+} from "./types.js"
 import { getSeries, searchSeries } from "../../lib/mangaUpdatesClient.js"
 
 const listManhwas = async (page: number, perPage: number) => {

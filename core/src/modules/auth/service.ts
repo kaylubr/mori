@@ -1,5 +1,5 @@
 import { db } from "../../lib/database.js"
-import type { PublicUser } from "../../../types/user.js"
+import type { PublicUser } from "./types.js"
 
 const findByUsernameOrEmail = async (username: string, email: string) => {
   return await db.user.findFirst({

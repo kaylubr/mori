@@ -3,7 +3,7 @@ import { ZodError } from "zod"
 
 import passport from "passport"
 
-import type { User } from "../../../types/user.js"
+import type { User } from "./types.js"
 import { hashPassword } from "./password.js"
 import { registerSchema, loginSchema } from "./schema.js"
 import authService from "./service.js"
