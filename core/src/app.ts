@@ -8,6 +8,7 @@ import manhwaRoutes from "./modules/manhwa/routes.js"
 import shelfRoutes from "./modules/shelf/routes.js"
 import reviewRoutes from "./modules/review/routes.js"
 import reportRoutes from "./modules/report/routes.js"
+import { errorMiddleware, notFoundMiddleware } from "./middleware/errorMiddleware.js"
 import config from "./config/index.js"
 import { db } from "./lib/database.js"
 import "./modules/auth/passport.js"
@@ -43,5 +44,7 @@ app.use("/api/manhwa", manhwaRoutes)
 app.use("/api/shelf", shelfRoutes)
 app.use("/api/manhwa", reviewRoutes)
 app.use("/api/reviews", reportRoutes)
+app.use(notFoundMiddleware)
+app.use(errorMiddleware)
 
 export default app
