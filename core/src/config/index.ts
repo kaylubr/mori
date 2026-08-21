@@ -7,6 +7,7 @@ const DATABASE_URL = {
   testing: process.env.TEST_DATABASE_URL,
   production: process.env.PROD_DATABASE_URL,
 }[NODE_ENV] ?? ""
+const MANGAUPDATES_BASE_URL = process.env.MANGAUPDATES_BASE_URL ?? "https://api.mangaupdates.com/v1"
 const SESSION_SECRET = process.env.SESSION_SECRET ?? "changeme"
 const SESSION_MAX_AGE_MS = Number(process.env.SESSION_MAX_AGE_MS ?? 7 * 24 * 60 * 60 * 1000)
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? ""
@@ -20,6 +21,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL ?? "http://localhost:5173"
 export default {
   PORT,
   DATABASE_URL,
+  MANGAUPDATES_BASE_URL,
   SESSION_SECRET,
   SESSION_MAX_AGE_MS,
   GOOGLE_CLIENT_ID,

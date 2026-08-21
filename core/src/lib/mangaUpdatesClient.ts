@@ -1,0 +1,24 @@
+import config from "../config/index.js"
+import type { MangaUpdatesSearchRequest } from "../../types/manhwa.js"
+
+const request = async (url: string, init?: RequestInit): Promise<unknown> => {
+  const response = await fetch(url, init)
+
+  if (!response.ok) {
+    throw new Error(`MangaUpdates request failed with status ${response.status}`)
+  }
+
+  return await response.json()
+}
+
+export const searchSeries = async (body: MangaUpdatesSearchRequest): Promise<unknown> => {
+  return await request(`${config.MANGAUPDATES_BASE_URL}/series/search`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  })
+}
+
+export const getSeries = async (seriesId: number): Promise<unknown> => {
+  return await request(`${config.MANGAUPDATES_BASE_URL}/series/${seriesId}`)
+}

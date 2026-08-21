@@ -99,10 +99,6 @@ const logout = (req: Request, res: Response, next: NextFunction) => {
 }
 
 const me = (req: Request, res: Response) => {
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({ error: "Not authenticated" })
-  }
-
   return res.json({ user: sanitizeUser(req.user as User) })
 }
 
