@@ -1,7 +1,12 @@
 import "dotenv/config"
 
 const PORT = Number(process.env.PORT ?? 3000)
-const DATABASE_URL = process.env.DATABASE_URL ?? process.env.DEV_DATABASE_URL ?? ""
+const NODE_ENV = process.env.NODE_ENV ?? "development"
+const DATABASE_URL = {
+  development: process.env.DEV_DATABASE_URL,
+  testing: process.env.TEST_DATABASE_URL,
+  production: process.env.PROD_DATABASE_URL,
+}[NODE_ENV] ?? ""
 const SESSION_SECRET = process.env.SESSION_SECRET ?? "changeme"
 const SESSION_MAX_AGE_MS = Number(process.env.SESSION_MAX_AGE_MS ?? 7 * 24 * 60 * 60 * 1000)
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? ""
