@@ -1,8 +1,21 @@
-import manhwaRepository from "./repository.js"
+import { db } from "../../lib/database.js"
 import reviewService from "../review/service.js"
 
 const listManhwa = async (page: number, perPage: number) => {
-	const { manhwas, total } = await manhwaRepository.listManhwa({ page, perPage })
+	const [manhwas, total] = await Promise.all([
+    db.manhwa.findMany({
+      skip: (page - 1) * perPage,
+      take: perPage,
+      orderBy: { title: "asc" },
+      select: {
+        id: true,
+        title: true,
+        thumbnailUrl: true,
+        status: true,
+      },
+    }),
+    db.manhwa.count(),
+  ])
 
 	return {
 		total,
@@ -18,7 +31,10 @@ const listManhwa = async (page: number, perPage: number) => {
 }
 
 const getManhwaById = async (id: number) => {
-	const manhwa = await manhwaRepository.getManhwaById(id)
+	const manhwa = await db.manhwa.findUnique({
+    where: { id },
+    include: { tags: true },
+  })
 
 	if (!manhwa) {
 		return null
