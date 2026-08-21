@@ -7,6 +7,7 @@ import authRoutes from "./modules/auth/routes.js"
 import manhwaRoutes from "./modules/manhwa/routes.js"
 import shelfRoutes from "./modules/shelf/routes.js"
 import reviewRoutes from "./modules/review/routes.js"
+import reportRoutes from "./modules/report/routes.js"
 import config from "./config/index.js"
 import { db } from "./lib/database.js"
 import "./modules/auth/passport.js"
@@ -41,5 +42,6 @@ app.use("/api/auth", authRoutes)
 app.use("/api/manhwa", manhwaRoutes)
 app.use("/api/shelf", shelfRoutes)
 app.use("/api/manhwa", reviewRoutes)
+app.use("/api/reviews", reportRoutes)
 
 export default app
