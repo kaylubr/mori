@@ -21,14 +21,21 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const parsed = registerSchema.parse(req.body)
 
-    const existingUser = await authService.findByUsernameOrEmail(parsed.username, parsed.email)
+    const existingUser = await authService.findByUsernameOrEmail(
+      parsed.username,
+      parsed.email,
+    )
 
     if (existingUser) {
       return res.status(409).json({ error: "Username or email already exists" })
     }
 
     const passwordHash = await hashPassword(parsed.password)
-    const user = await authService.createUser(parsed.username, parsed.email, passwordHash)
+    const user = await authService.createUser(
+      parsed.username,
+      parsed.email,
+      passwordHash,
+    )
 
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -39,7 +46,9 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     })
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(400).json({ error: error.issues[0]?.message ?? "Invalid input" })
+      return res
+        .status(400)
+        .json({ error: error.issues[0]?.message ?? "Invalid input" })
     }
 
     return next(error)
@@ -52,31 +61,40 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     return res.status(400).json({ error: "Invalid username or password" })
   }
 
-  return passport.authenticate("local", (authError: unknown, user: User | false | undefined, info?: { code?: string }) => {
-    if (authError) {
-      return next(authError)
-    }
-
-    if (!user) {
-      if (info?.code === "no-account") {
-        return res.status(404).json({ error: "Account doesn't exist" })
+  return passport.authenticate(
+    "local",
+    (
+      authError: unknown,
+      user: User | false | undefined,
+      info?: { code?: string },
+    ) => {
+      if (authError) {
+        return next(authError)
       }
 
-      if (info?.code === "passwordless") {
-        return res.status(400).json({ error: "This account signs in with Google/GitHub" })
+      if (!user) {
+        if (info?.code === "no-account") {
+          return res.status(404).json({ error: "Account doesn't exist" })
+        }
+
+        if (info?.code === "passwordless") {
+          return res
+            .status(400)
+            .json({ error: "This account signs in with Google/GitHub" })
+        }
+
+        return res.status(401).json({ error: "Invalid username or password" })
       }
 
-      return res.status(401).json({ error: "Invalid username or password" })
-    }
+      return req.login(user, (loginError) => {
+        if (loginError) {
+          return next(loginError)
+        }
 
-    return req.login(user, (loginError) => {
-      if (loginError) {
-        return next(loginError)
-      }
-
-      return res.json({ user: sanitizeUser(user) })
-    })
-  })(req, res, next)
+        return res.json({ user: sanitizeUser(user) })
+      })
+    },
+  )(req, res, next)
 }
 
 const logout = (req: Request, res: Response, next: NextFunction) => {
@@ -106,4 +124,32 @@ const getUsers = async (_req: Request, res: Response) => {
   return res.json(await authService.getUsers())
 }
 
-export default { register, login, logout, me, getUsers }
+const oauthSuccess = (_req: Request, res: Response) => {
+  const frontendUrl = JSON.stringify(
+    process.env.FRONTEND_URL ?? "http://localhost:5173",
+  )
+
+  return res.send(`<!doctype html>
+<html><body><script>
+window.opener?.postMessage({ type: "oauth-success" }, ${frontendUrl});
+window.close();
+</script></body></html>`)
+}
+
+const oauthFailure = (_req: Request, res: Response) => {
+  return res.status(401).send(`<!doctype html>
+<html><body><script>
+window.opener?.postMessage({ type: "oauth-failure" }, ${JSON.stringify(process.env.FRONTEND_URL ?? "http://localhost:5173")});
+window.close();
+</script></body></html>`)
+}
+
+export default {
+  register,
+  login,
+  logout,
+  me,
+  getUsers,
+  oauthSuccess,
+  oauthFailure,
+}
