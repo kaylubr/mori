@@ -105,7 +105,8 @@ header {
   border: 1px solid #e1e3e5;
   box-shadow: 0 18px 50px rgba(31, 35, 38, 0.07);
 }
-#login-title {
+#login-title,
+#register-title {
   margin: 0;
   font-family: "Cinzel", serif;
   font-size: clamp(1.8rem, 5vw, 2.2rem);

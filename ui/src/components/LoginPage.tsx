@@ -13,7 +13,7 @@ const LoginPage = () => {
         <LoginForm />
         <SocialLogin />
         <p className="signup-prompt">
-          Don't have an account? <a href="#create-account">Register</a>
+          Don't have an account? <a href="#register">Register</a>
         </p>
       </section>
     </main>
