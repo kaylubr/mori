@@ -37,6 +37,7 @@ header {
   height: 74px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 7vw;
   background: #fff;
   border-bottom: 1px solid #ececec;
@@ -48,6 +49,22 @@ header {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-decoration: none;
+}
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.72rem;
+}
+.auth-links a {
+  color: #000;
+  text-decoration: none;
+}
+.auth-links a:hover,
+.auth-links a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .secondary-nav {
   display: flex;
