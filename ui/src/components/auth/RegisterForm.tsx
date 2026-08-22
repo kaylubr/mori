@@ -10,10 +10,12 @@ const RegisterForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
     setError("")
+    setSuccess("")
 
     if (!username.trim() || !email.trim() || !password || !confirmPassword) {
       setError("Complete all fields to create your account.")
@@ -46,11 +48,13 @@ const RegisterForm = () => {
           result?.error ?? "Unable to create your account right now.",
         )
       }
+
+      setSuccess("Your account was created and you are signed in.")
     } catch (submitError) {
       setError(
         submitError instanceof Error
           ? submitError.message
-          : "Unable to create your account right now.",
+          : "Unable to connect to the server right now.",
       )
     } finally {
       setIsSubmitting(false)
@@ -132,6 +136,14 @@ const RegisterForm = () => {
           role="alert"
         >
           {error}
+        </p>
+      )}
+      {success && (
+        <p
+          className="form-success"
+          role="status"
+        >
+          {success}
         </p>
       )}
       <button

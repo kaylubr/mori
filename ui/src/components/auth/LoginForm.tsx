@@ -7,10 +7,12 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
     setError("")
+    setSuccess("")
 
     if (!username.trim() || !password) {
       setError("Enter your username and password to continue.")
@@ -32,11 +34,13 @@ const LoginForm = () => {
         } | null
         throw new Error(result?.error ?? "Unable to sign in right now.")
       }
+
+      setSuccess("You are signed in.")
     } catch (submitError) {
       setError(
         submitError instanceof Error
           ? submitError.message
-          : "Unable to sign in right now.",
+          : "Unable to connect to the server right now.",
       )
     } finally {
       setIsSubmitting(false)
@@ -89,6 +93,14 @@ const LoginForm = () => {
           role="alert"
         >
           {error}
+        </p>
+      )}
+      {success && (
+        <p
+          className="form-success"
+          role="status"
+        >
+          {success}
         </p>
       )}
       <button

@@ -199,6 +199,11 @@ input:focus {
   color: #b42318;
   font-size: 0.72rem;
 }
+.form-success {
+  margin: 6px 0 0;
+  color: #28734f;
+  font-size: 0.72rem;
+}
 .submit-button {
   height: 47px;
   margin-top: 14px;
