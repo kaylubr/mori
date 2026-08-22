@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <main className="login-main">
       <section
-        className="login-panel"
+        className="auth-panel"
         aria-labelledby="login-title"
       >
         <h1 id="login-title">Welcome back</h1>

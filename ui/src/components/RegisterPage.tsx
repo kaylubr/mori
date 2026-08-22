@@ -5,7 +5,7 @@ const RegisterPage = () => {
   return (
     <main className="login-main">
       <section
-        className="login-panel"
+        className="auth-panel register-panel"
         aria-labelledby="register-title"
       >
         <h1 id="register-title">Create your account</h1>

@@ -42,7 +42,9 @@ const RegisterForm = () => {
         const result = (await response.json().catch(() => null)) as {
           error?: string
         } | null
-        throw new Error(result?.error ?? "Unable to create your account right now.")
+        throw new Error(
+          result?.error ?? "Unable to create your account right now.",
+        )
       }
     } catch (submitError) {
       setError(
