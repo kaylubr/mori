@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { FormEvent } from "react"
+import type { SyntheticEvent } from "react"
 
 const LoginForm = () => {
   const [username, setUsername] = useState("")
@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
     setError("")
 
