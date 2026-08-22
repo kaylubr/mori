@@ -12,7 +12,7 @@ const RegisterPage = () => {
         <RegisterForm />
         <SocialLogin />
         <p className="signup-prompt">
-          Already have an account? <a href="#login">LOG IN</a>
+          Already have an account? <a href="#login">Log in</a>
         </p>
       </section>
     </main>

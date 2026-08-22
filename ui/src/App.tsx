@@ -7,6 +7,7 @@ import RegisterPage from "./components/RegisterPage"
 
 const App = () => {
   const [page, setPage] = useState(window.location.hash)
+  const isAuthPage = page === "" || page === "#login" || page === "#register"
 
   useEffect(() => {
     const handleHashChange = () => setPage(window.location.hash)
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <div className="app-shell">
-      <Header />
+      <Header isAuthPage={isAuthPage} />
       {page === "#register" ? <RegisterPage /> : <LoginPage />}
       <Footer />
     </div>

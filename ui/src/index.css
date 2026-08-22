@@ -3,6 +3,8 @@
 :root {
   font-family: "Poppins", sans-serif;
   --header-inline-padding: 7vw;
+  --secondary-color: #8A8E75;
+  --secondary-color-hover: #777a67;
   color: #171717;
   background: #f8f9fa;
   font-synthesis: none;
@@ -35,10 +37,10 @@ header {
 }
 
 .brand-bar {
-  height: 74px;
+  min-height: 74px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 4rem);
   padding: 0 var(--header-inline-padding);
   background: #fff;
   border-bottom: 1px solid #ececec;
@@ -68,17 +70,15 @@ header {
   text-underline-offset: 3px;
 }
 .secondary-nav {
+  margin-left: auto;
   display: flex;
-  justify-content: flex-end;
   gap: clamp(1rem, 2vw, 2rem);
-  padding: 15px var(--header-inline-padding);
-  background: #fcae67;
-  font-family: "Cinzel";
+  font-family: "Poppins", "serif";
 }
 .secondary-nav a {
   font-size: 0.85rem;
   text-decoration: none;
-  font-weight: bolder;
+  font-weight: 600;
 }
 .secondary-nav a:hover,
 .secondary-nav a:focus-visible {
@@ -162,7 +162,7 @@ input:focus {
 }
 .password-label-row a,
 .signup-prompt a {
-  color: #a76200;
+  color: var(--secondary-color);
   font-size: 0.7rem;
   font-weight: 600;
   text-decoration: none;
@@ -202,16 +202,16 @@ input:focus {
 .submit-button {
   height: 47px;
   margin-top: 14px;
-  color: #171717;
+  color: #fff;
   font: inherit;
   font-size: 0.8rem;
   font-weight: 700;
   border: 0;
-  background: #f5a30b;
+  background: var(--secondary-color);
   cursor: pointer;
 }
 .submit-button:hover:not(:disabled) {
-  background: #e79500;
+  background: var(--secondary-color-hover);
 }
 .submit-button:disabled {
   cursor: wait;
@@ -287,10 +287,17 @@ footer {
   }
 
   .brand-bar {
-    height: 64px;
+    min-height: 64px;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
   .secondary-nav {
-    gap: 1.55rem;
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
   }
   .secondary-nav a {
     font-size: 0.74rem;
