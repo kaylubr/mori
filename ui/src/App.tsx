@@ -1,25 +1,16 @@
-import { useEffect, useState } from "react"
+import { Outlet, useLocation } from "react-router-dom"
 
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import LoginPage from "./components/LoginPage"
-import RegisterPage from "./components/RegisterPage"
 
 const App = () => {
-  const [page, setPage] = useState(window.location.hash)
-  const isAuthPage = page === "" || page === "#login" || page === "#register"
-
-  useEffect(() => {
-    const handleHashChange = () => setPage(window.location.hash)
-    window.addEventListener("hashchange", handleHashChange)
-
-    return () => window.removeEventListener("hashchange", handleHashChange)
-  }, [])
+  const { pathname } = useLocation()
+  const isAuthPage = pathname === "/login" || pathname === "/register"
 
   return (
     <div className="app-shell">
       <Header isAuthPage={isAuthPage} />
-      {page === "#register" ? <RegisterPage /> : <LoginPage />}
+      <Outlet />
       <Footer />
     </div>
   )

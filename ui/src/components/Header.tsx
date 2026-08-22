@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 type HeaderProps = {
   isAuthPage: boolean
 }
@@ -11,15 +13,15 @@ const Header = ({ isAuthPage }: HeaderProps) => {
           className="secondary-nav"
           aria-label="Main navigation"
         >
-          <a href="#catalog">Catalog</a>
-          <a href="#shelf">My Shelf</a>
-          <a href="#community">Community</a>
+          <Link to="/catalog">Catalog</Link>
+          <Link to="/shelf">My Shelf</Link>
+          <Link to="/community">Community</Link>
         </nav>
         {!isAuthPage && (
           <div className="auth-links">
-            <a href="#login">Login</a>
+            <Link to="/login">Login</Link>
             <p>/</p>
-            <a href="#register">Register</a>
+            <Link to="/register">Register</Link>
           </div>
         )}
       </div>

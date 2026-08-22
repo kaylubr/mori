@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 import RegisterForm from "./auth/RegisterForm"
 import SocialLogin from "./auth/SocialLogin"
 
@@ -12,7 +14,7 @@ const RegisterPage = () => {
         <RegisterForm />
         <SocialLogin />
         <p className="signup-prompt">
-          Already have an account? <a href="#login">Log in</a>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
       </section>
     </main>
