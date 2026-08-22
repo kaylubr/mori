@@ -9,13 +9,23 @@ const SocialLogin = () => {
           href="/auth/google"
           className="oauth-button"
         >
-          <span aria-hidden="true">G</span> Google
+          <img
+            src="/google-logo.svg"
+            alt="Google logo"
+            aria-hidden="true"
+          />
+          Google
         </a>
         <a
           href="/auth/github"
           className="oauth-button"
         >
-          <span aria-hidden="true">&lt; &gt;</span> GitHub
+          <img
+            src="/github-logo.svg"
+            alt="Github logo"
+            aria-hidden="true"
+          />
+          GitHub
         </a>
       </div>
     </>

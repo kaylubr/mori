@@ -49,7 +49,7 @@ a {
   gap: clamp(2rem, 8vw, 8rem);
   padding: 15px 24px;
   background: #fcae67;
-  font-family: 'Cinzel';
+  font-family: "Cinzel";
 }
 .secondary-nav a {
   font-size: 0.85rem;
@@ -221,8 +221,14 @@ input:focus {
   border-color: #a9afb4;
   background: #fafafa;
 }
-.oauth-button span {
-  font-weight: 700;
+.oauth-button img,
+.footer-github img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.oauth-button img {
+  flex: 0 0 18px;
 }
 .signup-prompt {
   margin: 28px 0 0;
@@ -231,11 +237,28 @@ input:focus {
   font-size: 0.72rem;
 }
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   padding: 22px 24px;
   color: #9da3a8;
   text-align: center;
   font-size: 0.65rem;
   background: #f8f9fa;
+}
+.footer-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7b8288;
+  text-decoration: none;
+}
+.footer-github:hover {
+  color: #303438;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 @media (max-width: 480px) {
