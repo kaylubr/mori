@@ -244,8 +244,7 @@ input:focus {
   border-color: #a9afb4;
   background: #fafafa;
 }
-.oauth-button img,
-.footer-github img {
+.oauth-button img {
   width: 18px;
   height: 18px;
   object-fit: contain;
@@ -268,20 +267,8 @@ footer {
   padding: 22px 24px;
   color: #9da3a8;
   text-align: center;
-  font-size: 0.65rem;
+  font-size: 1rem;
   background: #f8f9fa;
-}
-.footer-github {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: #7b8288;
-  text-decoration: none;
-}
-.footer-github:hover {
-  color: #303438;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 @media (max-width: 480px) {
