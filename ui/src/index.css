@@ -27,6 +27,12 @@ a {
   flex-direction: column;
 }
 
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .brand-bar {
   height: 74px;
   display: flex;
@@ -241,7 +247,7 @@ footer {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 2rem;
   padding: 22px 24px;
   color: #9da3a8;
   text-align: center;
