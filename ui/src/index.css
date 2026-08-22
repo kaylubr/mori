@@ -2,6 +2,7 @@
 
 :root {
   font-family: "Poppins", sans-serif;
+  --header-inline-padding: 7vw;
   color: #171717;
   background: #f8f9fa;
   font-synthesis: none;
@@ -38,7 +39,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 7vw;
+  padding: 0 var(--header-inline-padding);
   background: #fff;
   border-bottom: 1px solid #ececec;
 }
@@ -68,9 +69,9 @@ header {
 }
 .secondary-nav {
   display: flex;
-  justify-content: center;
-  gap: clamp(2rem, 8vw, 8rem);
-  padding: 15px 24px;
+  justify-content: flex-end;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding: 15px var(--header-inline-padding);
   background: #fcae67;
   font-family: "Cinzel";
 }
@@ -272,9 +273,12 @@ footer {
 }
 
 @media (max-width: 480px) {
+  :root {
+    --header-inline-padding: 24px;
+  }
+
   .brand-bar {
     height: 64px;
-    padding: 0 24px;
   }
   .secondary-nav {
     gap: 1.55rem;
